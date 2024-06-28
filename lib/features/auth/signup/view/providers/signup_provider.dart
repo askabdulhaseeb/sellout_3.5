@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
+import '../../../phone_number_opt_varification/view/screens/phone_number_opt_varification_screen.dart';
+
 class SignupProvider extends ChangeNotifier {
   Future<void> onSignup(BuildContext context) async {
     try {
@@ -10,9 +12,28 @@ class SignupProvider extends ChangeNotifier {
       // Set loading to false
       setIsLoading(false);
       // Navigate to the next screen
-      // Navigator.of(context).pushNamed('/home');
+      Navigator.of(context)
+          .pushNamed(PhoneNumberOtpVarificationScreen.routeName);
     } catch (e) {
       debugPrint('❌ Error SignupProvider.onSignup: $e');
+    }
+  }
+
+  Future<void> onOtpVarification(BuildContext context,
+      {required String value}) async {
+    try {
+      // Perform otp varification logic
+      // Navigate to the next screen
+    } catch (e) {
+      debugPrint('❌ Error SignupProvider.onOtpVarification: $e');
+    }
+  }
+
+  Future<void> resendOtp(BuildContext context) async {
+    try {
+      // Perform resend otp logic
+    } catch (e) {
+      debugPrint('❌ Error SignupProvider.resendOtp: $e');
     }
   }
 
