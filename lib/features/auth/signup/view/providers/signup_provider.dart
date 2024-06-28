@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
+import '../../../../../core/enums/user/user_type.dart';
+import '../../../account_type_section/view/screens/account_type_selection_screen.dart';
 import '../../../phone_number_opt_varification/view/screens/phone_number_opt_varification_screen.dart';
 
 class SignupProvider extends ChangeNotifier {
@@ -24,6 +26,7 @@ class SignupProvider extends ChangeNotifier {
     try {
       // Perform otp varification logic
       // Navigate to the next screen
+      Navigator.of(context).pushNamed(AccountTypeSelectionScreen.routeName);
     } catch (e) {
       debugPrint('❌ Error SignupProvider.onOtpVarification: $e');
     }
@@ -34,6 +37,14 @@ class SignupProvider extends ChangeNotifier {
       // Perform resend otp logic
     } catch (e) {
       debugPrint('❌ Error SignupProvider.resendOtp: $e');
+    }
+  }
+
+  Future<void> onAccountSelectionComplete(BuildContext context) async {
+    try {
+      // Perform account selection complete logic
+    } catch (e) {
+      debugPrint('❌ Error SignupProvider.onAccountSelectionComplete: $e');
     }
   }
 
@@ -48,6 +59,11 @@ class SignupProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void userTypeChanged(UserType value) {
+    _selectedUserType = value;
+    notifyListeners();
+  }
+
   // Getters
   bool get isLoading => _isLoading;
   TextEditingController get name => _name;
@@ -56,6 +72,7 @@ class SignupProvider extends ChangeNotifier {
   TextEditingController get email => _email;
   TextEditingController get password => _password;
   GlobalKey<FormState> get formKey => _formKey;
+  UserType? get selectedUserType => _selectedUserType;
   // Controllers
   bool _isLoading = false;
   final TextEditingController _name = TextEditingController();
@@ -64,4 +81,5 @@ class SignupProvider extends ChangeNotifier {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  UserType? _selectedUserType;
 }
