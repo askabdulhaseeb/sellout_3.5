@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'features/auth/welcome/view/screens/welcome_screen.dart';
+import 'providers.dart';
+import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,19 +13,19 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SellOut',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: providers,
+      child: MaterialApp(
+        title: 'SellOut',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const WelcomeScreen(),
+        routes: routes,
       ),
-      home: const WelcomeScreen(),
-      routes: <String, WidgetBuilder>{
-        WelcomeScreen.routeName: (_) => const WelcomeScreen(),
-      },
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utilities/app_images.dart';
+import '../../../../../core/widgets/sellout_title.dart';
 
 class WelcomeTextWidget extends StatelessWidget {
   const WelcomeTextWidget({super.key});
@@ -13,14 +14,7 @@ class WelcomeTextWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 2,
           child: Image.asset(AppImages.logo),
         ),
-        Text(
-          'SellOut',
-          style: TextStyle(
-            fontSize: 42,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
+        const SellOutTitle(size: 42),
         const Opacity(
           opacity: 0.7,
           child: Text(
