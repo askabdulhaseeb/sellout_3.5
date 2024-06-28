@@ -5,7 +5,7 @@ import 'features/auth/phone_number_opt_varification/view/screens/phone_number_op
 import 'features/auth/signin/view/screens/signin_screen.dart';
 import 'features/auth/signup/view/screens/signup_screen.dart';
 import 'features/auth/welcome/view/screens/welcome_screen.dart';
-import 'features/dashboard/view/dashboard_screen.dart';
+import 'features/dashboard/view/screens/dashboard_screen.dart';
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   WelcomeScreen.routeName: (_) => const WelcomeScreen(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/sellout_title.dart';
-import '../../../../dashboard/view/dashboard_screen.dart';
+import '../../../../dashboard/view/screens/dashboard_screen.dart';
 import '../widgets/signin_buttons_widget.dart';
 import '../widgets/signin_form_widget.dart';
 

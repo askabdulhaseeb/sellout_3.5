@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../../core/enums/user/user_type.dart';
+import '../../../../dashboard/view/screens/dashboard_screen.dart';
 import '../../../account_type_section/view/screens/account_type_selection_screen.dart';
 import '../../../phone_number_opt_varification/view/screens/phone_number_opt_varification_screen.dart';
 
@@ -43,6 +44,7 @@ class SignupProvider extends ChangeNotifier {
   Future<void> onAccountSelectionComplete(BuildContext context) async {
     try {
       // Perform account selection complete logic
+      Navigator.of(context).pushNamed(DashboardScreen.routeName);
     } catch (e) {
       debugPrint('❌ Error SignupProvider.onAccountSelectionComplete: $e');
     }

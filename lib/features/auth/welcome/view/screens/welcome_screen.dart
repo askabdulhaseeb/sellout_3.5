@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../dashboard/view/dashboard_screen.dart';
+import '../../../../dashboard/view/screens/dashboard_screen.dart';
 import '../widgets/welcome_buttons_widget.dart';
 import '../widgets/welcome_text_widget.dart';
 
