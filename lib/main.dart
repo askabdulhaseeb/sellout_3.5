@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'features/auth/welcome/view/screens/welcome_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -17,7 +19,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(body: Center(child: Text('Hello World'))),
+      home: const WelcomeScreen(),
+      routes: <String, WidgetBuilder>{
+        WelcomeScreen.routeName: (_) => const WelcomeScreen(),
+      },
     );
   }
 }
