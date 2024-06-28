@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/widgets/custom_elevation_button.dart';
+import '../../../signup/view/screens/signup_screen.dart';
 import '../providers/signin_provider.dart';
 
 class SigninButtonWidget extends StatelessWidget {
@@ -39,9 +40,8 @@ class SigninButtonWidget extends StatelessWidget {
           ),
           CustomElevatedButton(
             title: 'Create an account',
-            onTap: () {
-              // TODO: Implement Create an account
-            },
+            onTap: () =>
+                Navigator.of(context).pushNamed(SignupScreen.routeName),
             isLoading: false,
             border: Border.all(),
             bgColor: Colors.transparent,
