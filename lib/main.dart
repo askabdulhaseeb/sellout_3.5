@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
+import 'core/sources/local/auth/local_auth.dart';
+import 'core/sources/local/core/hive_db.dart';
 import 'features/auth/welcome/view/screens/welcome_screen.dart';
+import 'features/dashboard/view/screens/dashboard_screen.dart';
 import 'providers.dart';
 import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
+  await HiveDB.init();
   runApp(const MyApp());
 }
 
@@ -27,9 +31,14 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
           useMaterial3: true,
         ),
-        home: const WelcomeScreen(),
+        home: LocalAuth.currentUser == null
+            ? const WelcomeScreen()
+            : const DashboardScreen(),
         routes: routes,
       ),
     );
   }
 }
+
+// flutter packages pub run build_runner build --delete-conflicting-outputs
+// flutter packages pub run build_runner build

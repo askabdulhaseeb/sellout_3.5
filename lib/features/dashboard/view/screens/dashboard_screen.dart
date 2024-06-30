@@ -8,8 +8,6 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: DashboardAppbarWidget(),
-    );
+    return const Scaffold(appBar: DashboardAppbarWidget());
   }
 }

@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import '../../../../../core/enums/core/api_request_type.dart';
 import '../../../../../core/sources/apis/api_call.dart';
 import '../../../../../core/sources/apis/data_state.dart';
+import '../../../../../core/sources/local/auth/local_auth.dart';
 import '../../../../../core/utilities/app_strings.dart';
 import '../models/current_user_model.dart';
 
 class SigninAPI {
-  Future<DataState<bool>> signin(
-      {required String email, required String password}) async {
+  Future<DataState<bool>> signin({
+    required String email,
+    required String password,
+  }) async {
     try {
       final String url = '${AppStrings().baseURL}/userAuth/login';
       // Request
@@ -27,21 +30,16 @@ class SigninAPI {
         // Current User
         final CurrentUserEntity currentUser =
             CurrentUserModel.fromRawJson(result.data ?? '');
-        debugPrint(
-          '👉🏻 SigninAPI.signin: $currentUser'
-          '\n👉🏻 SigninAPI.signin: ${currentUser.email}'
-          '\n👉🏻 SigninAPI.signin: ${currentUser.token}'
-          '\n👉🏻 SigninAPI.signin: ${currentUser.userName}'
-          '\n👉🏻 SigninAPI.signin: ${currentUser.userId}'
-          '\n👉🏻 SigninAPI.signin: ${currentUser.fullName}',
-        );
+        await LocalAuth().signin(currentUser);
         return result;
       } else if (result is DataFailer) {
-        debugPrint('❌ Error in SigninAPI.signin: ${result.exception?.message}');
+        debugPrint(
+            '❌ Error in SigninAPI.signin: else if (result is DataFailer) - ${result.exception?.message}');
+        return result;
       }
       return result;
     } catch (e) {
-      debugPrint('❌ Error in SigninAPI.signin: $e');
+      debugPrint('❌ Error in SigninAPI.signin: catch (e) - $e');
       return DataFailer<bool>(CustomException(e.toString()));
     }
   }
