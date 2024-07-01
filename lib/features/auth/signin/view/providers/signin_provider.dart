@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/sources/apis/data_state.dart';
 import '../../../../dashboard/view/screens/dashboard_screen.dart';
 import '../../data/models/current_user_model.dart';
-import '../../data/soruces/signin_api.dart';
+import '../../data/sources/signin_api.dart';
 
 class SigninProvider extends ChangeNotifier {
   Future<void> signin(BuildContext context) async {

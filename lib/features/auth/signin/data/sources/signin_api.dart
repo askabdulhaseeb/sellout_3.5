@@ -19,6 +19,7 @@ class SigninAPI {
       // Request
       final DataState<bool> result = await ApiCall<bool>().call(
         url: url,
+        isAuth: false,
         requestType: ApiRequestType.post,
         body: json.encode(<String, String>{
           'email': email.trim(),
