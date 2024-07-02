@@ -28,13 +28,14 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       token: fields[8] as String,
       profilePic: fields[9] as String,
       userName: fields[10] as String,
+      ratings: fields[11] == null ? [] : (fields[11] as List).cast<double>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, UserEntity obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.uid)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       ..writeByte(9)
       ..write(obj.profilePic)
       ..writeByte(10)
-      ..write(obj.userName);
+      ..write(obj.userName)
+      ..writeByte(11)
+      ..write(obj.ratings);
   }
 
   @override

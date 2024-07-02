@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/enums/core/api_request_type.dart';
 import '../../../../core/sources/apis/api_call.dart';
 import '../../../../core/sources/apis/data_state.dart';
+import '../../../../core/sources/local/local_user.dart';
 import '../../../../core/utilities/app_strings.dart';
 import '../models/user_model.dart';
 
@@ -24,6 +25,7 @@ class GetUserAPI {
       if (result is DataSuccess<bool>) {
         final String data = result.data ?? '';
         final UserEntity entity = UserModel.fromRawJson(data);
+        await LocalUser().save(entity);
         return DataSuccess<UserEntity>(data, entity);
       }
       return DataFailer<UserEntity?>(CustomException('User not found'));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/widgets/rating_display_widget.dart';
 import '../../../../data/models/user_model.dart';
 
 class ProfileHeaderInfoWidget extends StatelessWidget {
@@ -11,8 +12,8 @@ class ProfileHeaderInfoWidget extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      margin: const EdgeInsets.only(right: 16, top: 12, bottom: 12, left: 8),
-      padding: const EdgeInsets.only(left: 8),
+      margin: const EdgeInsets.only(right: 16, top: 12, bottom: 16, left: 8),
+      padding: const EdgeInsets.only(left: 8, bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -45,6 +46,11 @@ class ProfileHeaderInfoWidget extends StatelessWidget {
             ),
           ),
           //
+          Row(
+            children: <Widget>[
+              RatingDisplayWidget(ratingList: user.ratings),
+            ],
+          ),
         ],
       ),
     );

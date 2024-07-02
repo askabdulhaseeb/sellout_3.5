@@ -6,6 +6,7 @@ import '../../../../core/sources/local/local_user.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../data/sources/user_api.dart';
 import '../../domain/entities/user_entity.dart';
+import '../widgets/button/profile_supporter_stats_section.dart';
 import '../widgets/header/profile_header_section.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -36,6 +37,7 @@ class ProfileScreen extends StatelessWidget {
           return Column(
             children: <Widget>[
               ProfileHeaderSection(user: user),
+              ProfileSupporterStatsSection(user: user),
             ],
           );
         },

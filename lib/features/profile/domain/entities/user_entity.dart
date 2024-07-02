@@ -15,6 +15,7 @@ class UserEntity {
     required this.token,
     required this.profilePic,
     required this.userName,
+    required this.ratings,
   });
 
   @HiveField(0)
@@ -39,4 +40,6 @@ class UserEntity {
   final String profilePic;
   @HiveField(10)
   final String userName;
+  @HiveField(11,defaultValue: <double>[])
+  final List<double> ratings;
 }
