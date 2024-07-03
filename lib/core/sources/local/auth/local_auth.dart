@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 
 import '../../../../features/auth/signin/data/models/current_user_model.dart';
 import '../../../utilities/app_strings.dart';
+export '../../../../features/auth/signin/data/models/current_user_model.dart';
 
 class LocalAuth {
   static final String boxTitle = AppStrings.localAuthBox;

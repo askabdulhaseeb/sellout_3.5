@@ -5,7 +5,6 @@ import '../../../../core/sources/local/auth/local_auth.dart';
 import '../../../../core/sources/local/local_user.dart';
 import '../../../../core/widgets/loader.dart';
 import '../../data/sources/user_api.dart';
-import '../../domain/entities/user_entity.dart';
 import '../widgets/button/profile_supporter_stats_section.dart';
 import '../widgets/header/profile_header_section.dart';
 

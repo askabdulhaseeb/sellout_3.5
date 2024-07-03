@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../core/enums/core/api_request_type.dart';
 import '../../../../core/sources/apis/api_call.dart';
 import '../../../../core/sources/apis/data_state.dart';
+import '../../../../core/sources/local/core/local_request_history.dart';
 import '../../../../core/sources/local/local_user.dart';
 import '../../../../core/utilities/app_strings.dart';
-import '../models/user_model.dart';
 
 class GetUserAPI {
   Future<DataState<UserEntity?>> user(String? uid) async {
@@ -14,6 +14,14 @@ class GetUserAPI {
         return DataFailer<UserEntity?>(CustomException('User ID is null'));
       }
       final String url = '${AppStrings().baseURL}/user/$uid';
+      ApiRequestEntity? request = await LocalRequestHistory()
+          .request(url, duration: const Duration(hours: 1));
+      if (request != null) {
+        final DataState<UserEntity?> local = LocalUser().userState(uid);
+        if (local is DataSuccess<UserEntity?> && local.entity != null) {
+          return local;
+        }
+      }
       // Request
       final DataState<bool> result = await ApiCall<bool>().call(
         url: url,
@@ -26,6 +34,7 @@ class GetUserAPI {
         final String data = result.data ?? '';
         final UserEntity entity = UserModel.fromRawJson(data);
         await LocalUser().save(entity);
+        await LocalRequestHistory().save(ApiRequestEntity(url: url));
         return DataSuccess<UserEntity>(data, entity);
       }
       return DataFailer<UserEntity?>(CustomException('User not found'));

@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../features/auth/signin/domain/entities/current_user_entity.dart';
-import '../../../../features/profile/data/models/user_model.dart';
 import '../auth/local_auth.dart';
 import '../local_user.dart';
+import 'local_request_history.dart';
 
 class HiveDB {
   static Future<void> init() async {
@@ -18,6 +17,7 @@ class HiveDB {
     // Hive
     Hive.registerAdapter(CurrentUserEntityAdapter()); // 0
     Hive.registerAdapter(UserEntityAdapter()); // 1
+    Hive.registerAdapter(ApiRequestEntityAdapter()); // 3
 
     // Hive box Open
     await refresh();
@@ -26,6 +26,7 @@ class HiveDB {
   static Future<void> refresh() async {
     await LocalAuth().refresh();
     await LocalUser().refresh();
+    await LocalRequestHistory().refresh();
   }
 
   Future<void> signout() async => await LocalAuth().signout();

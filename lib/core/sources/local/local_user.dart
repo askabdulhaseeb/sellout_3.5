@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../../features/profile/data/models/user_model.dart';
 import '../../utilities/app_strings.dart';
 import '../apis/data_state.dart';
+export '../../../features/profile/data/models/user_model.dart';
 
 class LocalUser {
   static final String boxTitle = AppStrings.localUsersBox;
@@ -19,7 +20,7 @@ class LocalUser {
       return await Hive.openBox<UserEntity>(boxTitle);
     }
   }
-  
+
   Future<void> save(UserEntity user) async => await _box.put(user.uid, user);
   UserEntity? userEntity(String value) => _box.get(value);
 

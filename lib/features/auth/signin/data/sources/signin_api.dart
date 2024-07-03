@@ -7,7 +7,6 @@ import '../../../../../core/sources/apis/api_call.dart';
 import '../../../../../core/sources/apis/data_state.dart';
 import '../../../../../core/sources/local/auth/local_auth.dart';
 import '../../../../../core/utilities/app_strings.dart';
-import '../models/current_user_model.dart';
 
 class SigninAPI {
   Future<DataState<bool>> signin({
