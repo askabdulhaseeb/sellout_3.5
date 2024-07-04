@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../ext/duration_ext.dart';
 import '../../../utilities/app_strings.dart';
 import 'entity/api_request_entity.dart';
 export 'entity/api_request_entity.dart';
@@ -31,10 +32,10 @@ class LocalRequestHistory {
     ApiRequestEntity? result = _box.get(value);
     if (result == null) return null;
     if (!result.timesAgo(duration)) {
-      debugPrint('🔵 Less then $duration - $value');
+      debugPrint('🔵 Less then ${duration.display()} - $value');
       return result;
     } else {
-      debugPrint('🔵 More then $duration - $value');
+      debugPrint('🔵 More then ${duration.display()} - $value');
       await delete(value);
       return null;
     }
