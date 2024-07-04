@@ -32,10 +32,10 @@ class LocalRequestHistory {
     ApiRequestEntity? result = _box.get(value);
     if (result == null) return null;
     if (!result.timesAgo(duration)) {
-      debugPrint('🔵 Less then ${duration.display()} - $value');
+      debugPrint('🟢 Less then ${duration.display()} - $value');
       return result;
     } else {
-      debugPrint('🔵 More then ${duration.display()} - $value');
+      debugPrint('🔴 More then ${duration.display()} - $value');
       await delete(value);
       return null;
     }

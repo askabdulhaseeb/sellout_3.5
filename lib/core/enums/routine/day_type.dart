@@ -13,12 +13,12 @@ enum DayType {
   final String json;
   final int number;
 
-  static DayType? fromJson(String? json) {
-    if (json == null) return null;
+  static DayType fromJson(String? json) {
+    if (json == null) return DayType.sunday;
     for (final DayType item in DayType.values) {
       if (item.json == json) return item;
     }
-    return null;
+    return DayType.sunday;
   }
 
   static List<DayType> get list => DayType.values;

@@ -15,7 +15,7 @@ class GetUserAPI {
       }
       final String url = '${AppStrings().baseURL}/user/$uid';
       ApiRequestEntity? request = await LocalRequestHistory()
-          .request(url, duration: const Duration(hours: 1));
+          .request(url, duration: const Duration(minutes: 30));
       if (request != null) {
         final DataState<UserEntity?> local = LocalUser().userState(uid);
         if (local is DataSuccess<UserEntity?> && local.entity != null) {

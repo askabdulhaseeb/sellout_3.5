@@ -31,7 +31,11 @@ class UserModel extends UserEntity {
         email: json['email'] ?? '',
         uid: json['uid'] ?? '',
         interest: List<dynamic>.from(json['interest']),
-        ratings: List<double>.from(json['list_of_reviews'] ?? <double>[]),
+        ratings: json['list_of_reviews'] != null
+            ? json['list_of_reviews']
+                .map<double>((dynamic e) => double.parse(e.toString()))
+                .toList()
+            : <double>[],
         lastLoginTime: json['last_login_time'] ?? '',
         date: DateTime.tryParse(
                 json['date']?.toString() ?? DateTime.now().toString()) ??
@@ -40,4 +44,8 @@ class UserModel extends UserEntity {
         profilePic: json['profile_pic'] ?? '',
         userName: json['user_name'] ?? '',
       );
+
+  double toDoublee(String value) {
+    return double.parse(value);
+  }
 }

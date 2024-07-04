@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../local_request_history.dart';
@@ -5,15 +6,22 @@ part 'api_request_entity.g.dart';
 
 @HiveType(typeId: 3)
 class ApiRequestEntity {
-  ApiRequestEntity({required this.url, this.lastRequest});
+  ApiRequestEntity({required this.url, DateTime? lastRequest})
+      : lastRequest = lastRequest ?? DateTime.now();
 
   @HiveField(0)
   final String url;
   @HiveField(1)
   DateTime? lastRequest;
 
-  bool timesAgo(Duration duration) =>
-      lastRequest != null && DateTime.now().difference(lastRequest!) > duration;
+  bool timesAgo(Duration duration) {
+    if (lastRequest == null) return true;
+    debugPrint(
+        'Difference from Last to Now ${DateTime.now().difference(lastRequest!)}');
+    debugPrint('Difference from Last to Now $duration');
+    return lastRequest != null &&
+        DateTime.now().difference(lastRequest!) > duration;
+  }
 
   Future<void> updateLastRequest() async {
     lastRequest = DateTime.now();
