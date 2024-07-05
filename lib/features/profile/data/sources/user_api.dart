@@ -34,7 +34,7 @@ class GetUserAPI {
         final String data = result.data ?? '';
         final UserEntity entity = UserModel.fromRawJson(data);
         await LocalUser().save(entity);
-        await LocalRequestHistory().save(ApiRequestEntity(url: url));
+        // await LocalRequestHistory().save(ApiRequestEntity(url: url));
         return DataSuccess<UserEntity>(data, entity);
       }
       return DataFailer<UserEntity?>(CustomException('User not found'));

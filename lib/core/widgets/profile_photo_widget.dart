@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfilePhotoWidget extends StatelessWidget {
-  const ProfilePhotoWidget({required this.photoUrl, this.size, super.key});
+  const ProfilePhotoWidget({
+    required this.photoUrl,
+    this.size,
+    this.borderRadius,
+    super.key,
+  });
   final String? photoUrl;
   final double? size;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: borderRadius ?? BorderRadius.circular(12),
       child: CachedNetworkImage(
         height: size,
         width: size,

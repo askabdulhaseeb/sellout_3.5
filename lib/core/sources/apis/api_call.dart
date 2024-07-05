@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../../enums/core/api_request_type.dart';
 import '../local/auth/local_auth.dart';
+import '../local/core/local_request_history.dart';
 import 'data_state.dart';
 
 class ApiCall<T> {
@@ -53,16 +54,19 @@ class ApiCall<T> {
       debugPrint('👉🏻 API Call: url - $url');
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final String data = await response.stream.bytesToString();
-        // debugPrint('✅ Request Success');
+        debugPrint('✅ Request Success');
         if (data.isEmpty) {
           log('❌ ERROR: ERROR: No Data Found - API: $url');
           return DataFailer<T>(CustomException('ERROR: No Data Found'));
         } else {
+          ApiRequestEntity apiRequestEntity = ApiRequestEntity(url: url);
+          await LocalRequestHistory().save(apiRequestEntity);
           return DataSuccess<T>(data, null);
         }
       } else {
         // Unauthorized
         // Failer
+        log('❌ ERROR: ${response.statusCode} - API: $url');
         return DataFailer<T>(CustomException('ERROR: ${response.statusCode}'));
       }
     } catch (e) {

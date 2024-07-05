@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/widgets/rating_display_widget.dart';
+import '../../../../../review/view/screens/display_reviews_list_screen.dart';
 import '../../../../data/models/user_model.dart';
 
 class ProfileHeaderInfoWidget extends StatelessWidget {
@@ -48,7 +49,13 @@ class ProfileHeaderInfoWidget extends StatelessWidget {
           //
           Row(
             children: <Widget>[
-              RatingDisplayWidget(ratingList: user.ratings),
+              RatingDisplayWidget(
+                ratingList: user.ratings,
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(DisplayReviewsListScreen.routeName);
+                },
+              ),
             ],
           ),
         ],

@@ -13,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   await HiveDB.init();
+  // setUrlStrategy(PathUrlStrategy());  ->  import 'package:flutter_web_plugins/flutter_web_plugins.dart';
   runApp(const MyApp());
 }
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
             ? const WelcomeScreen()
             : const DashboardScreen(),
         routes: routes,
+        // onGenerateRoute: onGenerateRoute,
       ),
     );
   }
