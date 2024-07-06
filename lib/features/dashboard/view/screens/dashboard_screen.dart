@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../add_listing/view/screens/add_listing_screen.dart';
+import '../../../listing/add_listing/view/screens/add_listing_screen.dart';
 import '../../../chat/view/screens/chat_screen.dart';
 import '../../../explore/view/screens/explore_screen.dart';
 import '../../../home/view/screens/home_screen.dart';

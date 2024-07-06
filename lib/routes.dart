@@ -9,6 +9,13 @@ import 'features/cart/view/screens/cart_screen.dart';
 import 'features/dashboard/view/screens/dashboard_screen.dart';
 import 'features/error/view/screens/error_screen.dart';
 import 'features/home/view/screens/home_screen.dart';
+import 'features/listing/add_listing/view/screens/add_listing_screen.dart';
+import 'features/listing/add_listing/view/screens/sub_screens/add_cloths_and_footwear_screen.dart';
+import 'features/listing/add_listing/view/screens/sub_screens/add_food_and_drink_screen.dart';
+import 'features/listing/add_listing/view/screens/sub_screens/add_item_screen.dart';
+import 'features/listing/add_listing/view/screens/sub_screens/add_pet_screen.dart';
+import 'features/listing/add_listing/view/screens/sub_screens/add_property_screen.dart';
+import 'features/listing/add_listing/view/screens/sub_screens/add_vehicle_screen.dart';
 import 'features/notification/view/screens/notification_screen.dart';
 import 'features/review/view/screens/display_reviews_list_screen.dart';
 import 'features/search/view/screens/search_screen.dart';
@@ -31,6 +38,16 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   SearchScreen.routeName: (_) => const SearchScreen(),
   NotificationScreen.routeName: (_) => const NotificationScreen(),
   CartScreen.routeName: (_) => const CartScreen(),
+  //
+  /// Listing
+  AddListingScreen.routeName: (_) => const AddListingScreen(),
+  AddItemScreen.routeName: (_) => const AddItemScreen(),
+  AddClothsAndFootwearScreen.routeName: (_) =>
+      const AddClothsAndFootwearScreen(),
+  AddVehicleScreen.routeName: (_) => const AddVehicleScreen(),
+  AddFoodAndDrinkScreen.routeName: (_) => const AddFoodAndDrinkScreen(),
+  AddPropertyScreen.routeName: (_) => const AddPropertyScreen(),
+  AddPetScreen.routeName: (_) => const AddPetScreen(),
   //
   /// Reviews
   DisplayReviewsListScreen.routeName: (_) => const DisplayReviewsListScreen(),

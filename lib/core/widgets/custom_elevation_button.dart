@@ -34,6 +34,9 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color bgColorCore = isDisable
+        ? Theme.of(context).dividerColor
+        : bgColor ?? Theme.of(context).primaryColor;
     return isLoading
         ? const SizedBox(
             width: 30,
@@ -46,17 +49,13 @@ class CustomElevatedButton extends StatelessWidget {
             margin: margin ?? const EdgeInsets.symmetric(vertical: 8),
             // constraints: BoxConstraints(maxWidth: mWidth ?? maxWidth),
             decoration: BoxDecoration(
-              color: isDisable
-                  ? Theme.of(context).dividerColor
-                  : bgColor ?? Theme.of(context).primaryColor,
+              color: bgColorCore,
               borderRadius: borderRadius ?? BorderRadius.circular(4),
               border: border,
             ),
             child: Material(
               borderRadius: borderRadius ?? BorderRadius.circular(4),
-              color: isDisable
-                  ? Theme.of(context).dividerColor
-                  : bgColor ?? Theme.of(context).primaryColor,
+              color: bgColorCore,
               child: InkWell(
                 borderRadius: borderRadius ?? BorderRadius.circular(4),
                 onTap: isDisable ? null : onTap,

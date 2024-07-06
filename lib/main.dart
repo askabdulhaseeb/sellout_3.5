@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         title: 'SellOut',
         theme: ThemeData(
           primaryColor: primaryColor,
+          shadowColor: Colors.black.withOpacity(0.2),
           colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
           useMaterial3: true,
         ),
