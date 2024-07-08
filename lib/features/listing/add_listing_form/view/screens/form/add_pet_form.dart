@@ -16,6 +16,7 @@ class AddPetForm extends StatelessWidget {
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       children: const <Widget>[
         AddListingBasicInfoSection(),
+        // TODO: Category selection widget
         AddListingPriceAndQuantityWidget(),
         AddListingPetAgeLeaveWidget(),
         AddListingConditionOfferSection(),

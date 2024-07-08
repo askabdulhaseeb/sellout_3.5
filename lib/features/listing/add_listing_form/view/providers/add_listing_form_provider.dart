@@ -9,6 +9,7 @@ import '../../../../../core/enums/listing/product_condition_type.dart';
 import '../../../../../core/enums/listing/product_delivery_type.dart';
 import '../../../../../core/enums/listing/product_privacy_type.dart';
 import '../../../../../core/enums/listing/pet/product_time_type.dart';
+import '../../../../../core/enums/listing/vehicle/transmission_type.dart';
 
 class AddListingFormProvider extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {
@@ -64,6 +65,13 @@ class AddListingFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Vehicle
+  void setTransmissionType(TransmissionType? value) {
+    if (value == null) return;
+    _transmissionType = value;
+    notifyListeners();
+  }
+
   // Property
   void setGarden(bool? value) {
     if (value == null) return;
@@ -109,6 +117,10 @@ class AddListingFormProvider extends ChangeNotifier {
   bool get acceptOffer => _acceptOffer;
   ProductPrivacyType get privacy => _privacy;
   ProductDeliveryType get deliveryType => _deliveryType;
+  // Vehicle
+  TransmissionType get transmissionType => _transmissionType;
+  TextEditingController get engineSize => _engineSize;
+  TextEditingController get mileage => _mileage;
   // Property
   TextEditingController get bedroom => _bedroom;
   TextEditingController get bathroom => _bathroom;
@@ -137,9 +149,14 @@ class AddListingFormProvider extends ChangeNotifier {
   bool _acceptOffer = true;
   ProductPrivacyType _privacy = ProductPrivacyType.public;
   ProductDeliveryType _deliveryType = ProductDeliveryType.delivery;
+  // Vehicle
+  TransmissionType _transmissionType = TransmissionType.auto;
+  final TextEditingController _engineSize = TextEditingController();
+  final TextEditingController _mileage = TextEditingController();
+
   // Property
-  TextEditingController _bedroom = TextEditingController();
-  TextEditingController _bathroom = TextEditingController();
+  final TextEditingController _bedroom = TextEditingController();
+  final TextEditingController _bathroom = TextEditingController();
   bool _garden = true;
   bool _parking = true;
   bool _animalFriendly = true;

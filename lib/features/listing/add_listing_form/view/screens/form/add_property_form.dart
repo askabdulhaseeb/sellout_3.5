@@ -15,6 +15,7 @@ class AddPropertyForm extends StatelessWidget {
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       children: const <Widget>[
         AddListingBasicInfoSection(),
+        // TODO: Category selection widget
         AddListingPropertyBedBathWidget(),
         AddPropertyGPAWidget(),
         AddListingConditionOfferSection(),

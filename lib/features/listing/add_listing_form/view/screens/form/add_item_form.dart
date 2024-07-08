@@ -19,6 +19,7 @@ class AddItemForm extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: const <Widget>[
             AddListingBasicInfoSection(),
+            // TODO: Category selection widget
             AddListingPriceAndQuantityWidget(),
             AddListingConditionOfferSection(),
             AddListingDeliverySelectionWidget(),

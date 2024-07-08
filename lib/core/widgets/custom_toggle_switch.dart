@@ -5,7 +5,7 @@ class CustomToggleSwitch<T> extends StatelessWidget {
     required this.labels,
     required this.labelStrs,
     required this.labelText,
-    this.onToggle,
+    required this.onToggle,
     this.customWidths,
     this.initialValue,
     this.readOnly = false,
