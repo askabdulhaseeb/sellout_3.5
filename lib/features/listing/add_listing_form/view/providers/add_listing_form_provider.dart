@@ -8,7 +8,7 @@ import '../../../../../core/enums/listing/listing_type.dart';
 import '../../../../../core/enums/listing/product_condition_type.dart';
 import '../../../../../core/enums/listing/product_delivery_type.dart';
 import '../../../../../core/enums/listing/product_privacy_type.dart';
-import '../../../../../core/enums/listing/product_time_type.dart';
+import '../../../../../core/enums/listing/pet/product_time_type.dart';
 
 class AddListingFormProvider extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {

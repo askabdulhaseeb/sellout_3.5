@@ -34,8 +34,8 @@ class CustomToggleSwitch<T> extends StatelessWidget {
           ),
           const SizedBox(height: 2),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: labels.length == 2 ? 16 : 8,
+            runSpacing: 16,
             alignment: WrapAlignment.spaceBetween,
             runAlignment: WrapAlignment.spaceBetween,
             children: labelStrs.map(
@@ -51,7 +51,7 @@ class CustomToggleSwitch<T> extends StatelessWidget {
                   child: Container(
                     width: minWidth / labelStrs.length,
                     padding: const EdgeInsets.symmetric(
-                      vertical: 8,
+                      vertical: 12,
                       horizontal: 16,
                     ),
                     decoration: BoxDecoration(

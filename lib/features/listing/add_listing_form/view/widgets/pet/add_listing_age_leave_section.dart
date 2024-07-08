@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../core/enums/listing/product_time_type.dart';
+import '../../../../../../core/enums/listing/pet/product_time_type.dart';
 import '../../../../../../core/widgets/custom_dropdown_widget.dart';
 import '../../providers/add_listing_form_provider.dart';
 
