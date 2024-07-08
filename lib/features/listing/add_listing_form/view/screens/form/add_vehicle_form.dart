@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddVehicleScreen extends StatelessWidget {
-  const AddVehicleScreen({super.key});
-  static const String routeName = '/add-vehicle';
+class AddVehicleForm extends StatelessWidget {
+  const AddVehicleForm({super.key});
 
   @override
   Widget build(BuildContext context) {

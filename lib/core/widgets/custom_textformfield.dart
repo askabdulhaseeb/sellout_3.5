@@ -19,7 +19,8 @@ class CustomTextFormField extends StatefulWidget {
     this.isExpanded = false,
     this.maxLength,
     this.prefixIcon,
-    this.showSuffixIcon = true,
+    this.suffixIcon,
+    this.showSuffixIcon = false,
     this.readOnly = false,
     this.autoFocus = false,
     this.textAlign = TextAlign.start,
@@ -34,6 +35,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? Function(String? value)? validator;
   final void Function(String)? onFieldSubmitted;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final bool showSuffixIcon;
   final EdgeInsetsGeometry? contentPadding;
   final int? minLines;
@@ -70,8 +72,9 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
@@ -116,20 +119,21 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
                       .color!
                       .withOpacity(0.05),
               hintText: widget.hint,
-              prefix: widget.prefixIcon,
+              prefixIcon: widget.prefixIcon,
               hintStyle: TextStyle(color: Colors.grey.shade400),
-              suffixIcon: (widget._controller!.text.isEmpty ||
-                      !widget.showSuffixIcon ||
-                      widget.showSuffixIcon == false ||
-                      widget.readOnly)
-                  ? null
-                  : IconButton(
-                      splashRadius: 16,
-                      onPressed: () => setState(() {
-                        widget._controller!.clear();
-                      }),
-                      icon: const Icon(CupertinoIcons.clear, size: 18),
-                    ),
+              suffixIcon: widget.suffixIcon ??
+                  ((widget._controller!.text.isEmpty ||
+                          !widget.showSuffixIcon ||
+                          widget.showSuffixIcon == false ||
+                          widget.readOnly)
+                      ? null
+                      : IconButton(
+                          splashRadius: 16,
+                          onPressed: () => setState(() {
+                            widget._controller!.clear();
+                          }),
+                          icon: const Icon(CupertinoIcons.clear, size: 18),
+                        )),
               focusColor: Theme.of(context).primaryColor,
               errorBorder: OutlineInputBorder(
                 borderSide:
@@ -139,7 +143,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
               border: widget.border ??
                   OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(4.0),
+                    borderRadius: BorderRadius.circular(8),
                   ),
             ),
           ),

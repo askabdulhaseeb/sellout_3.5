@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-class AddPropertyScreen extends StatelessWidget {
-  const AddPropertyScreen({super.key});
-  static const String routeName = '/add-property';
-  
+class AddPropertyForm extends StatelessWidget {
+  const AddPropertyForm({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

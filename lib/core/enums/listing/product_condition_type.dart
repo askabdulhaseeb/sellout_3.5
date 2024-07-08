@@ -1,18 +1,18 @@
-enum ProductConditionEnum {
+enum ProductConditionType {
   newC('New', 'new'),
   used('Used', 'used');
 
-  const ProductConditionEnum(this.title, this.json);
+  const ProductConditionType(this.title, this.json);
   final String title;
   final String json;
 
-  static ProductConditionEnum? fromJson(String? json) {
+  static ProductConditionType? fromJson(String? json) {
     if (json == null) return null;
-    for (final ProductConditionEnum item in ProductConditionEnum.values) {
+    for (final ProductConditionType item in ProductConditionType.values) {
       if (item.json == json) return item;
     }
     return null;
   }
 
-  static List<ProductConditionEnum> get list => ProductConditionEnum.values;
+  static List<ProductConditionType> get list => ProductConditionType.values;
 }

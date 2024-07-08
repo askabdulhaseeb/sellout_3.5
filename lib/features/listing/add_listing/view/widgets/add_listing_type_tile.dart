@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../core/enums/listing/listing_type.dart';
+import '../../../add_listing_form/view/providers/add_listing_form_provider.dart';
+import '../../../add_listing_form/view/screens/add_listing_form_screen.dart';
 
 class AddListingTypeTile extends StatelessWidget {
   const AddListingTypeTile({required this.type, super.key});
@@ -26,7 +29,11 @@ class AddListingTypeTile extends StatelessWidget {
         borderRadius: radius,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: InkWell(
-          onTap: () => Navigator.of(context).pushNamed(type.routeName),
+          onTap: () {
+            Provider.of<AddListingFormProvider>(context, listen: false)
+                .setListingType(type);
+            Navigator.of(context).pushNamed(AddListingFormScreen.routeName);
+          },
           borderRadius: radius,
           child: Padding(
             padding: const EdgeInsets.all(8.0),

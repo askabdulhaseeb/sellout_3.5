@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddFoodAndDrinkScreen extends StatelessWidget {
-  const AddFoodAndDrinkScreen({super.key});
-  static const String routeName = '/add-food-drink';
+class AddFoodAndDrinkForm extends StatelessWidget {
+  const AddFoodAndDrinkForm({super.key});
 
   @override
   Widget build(BuildContext context) {

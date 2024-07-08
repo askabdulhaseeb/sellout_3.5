@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddPetScreen extends StatelessWidget {
-  const AddPetScreen({super.key});
-  static const String routeName = '/add-pet';
+class AddPetForm extends StatelessWidget {
+  const AddPetForm({super.key});
 
   @override
   Widget build(BuildContext context) {
