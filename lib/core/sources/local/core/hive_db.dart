@@ -8,9 +8,11 @@ import '../auth/local_auth.dart';
 import '../local_review.dart';
 import '../local_user.dart';
 import 'local_request_history.dart';
+import 'local_state.dart';
 
 class HiveDB {
   static Future<void> init() async {
+    await LocalState.init();
     Directory directory = await getApplicationDocumentsDirectory();
     Hive.init(directory.path);
 

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/add_listing_basic_info_section.dart';
+import '../../widgets/add_listing_post_button_widget.dart';
+
 class AddFoodAndDrinkForm extends StatelessWidget {
   const AddFoodAndDrinkForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Add Food And Drink Screen')),
-      body: const Center(child: Text('Add Food And Drink Screen')),
+    return ListView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      children: const <Widget>[
+        AddListingBasicInfoSection(),
+        AddListingPostButtonWidget(),
+      ],
     );
   }
 }

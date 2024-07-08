@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/add_listing_basic_info_section.dart';
+import '../../widgets/add_listing_post_button_widget.dart';
+
 class AddPropertyForm extends StatelessWidget {
   const AddPropertyForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Add Property Screen')),
-      body: const Center(child: Text('Add Property Screen')),
+    return ListView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      children: const <Widget>[
+        AddListingBasicInfoSection(),
+        AddListingPostButtonWidget(),
+      ],
     );
   }
 }

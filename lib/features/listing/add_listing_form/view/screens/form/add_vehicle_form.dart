@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/add_listing_basic_info_section.dart';
+import '../../widgets/add_listing_post_button_widget.dart';
+
 class AddVehicleForm extends StatelessWidget {
   const AddVehicleForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Add Vehicle Screen')),
-      body: const Center(child: Text('Add Vehicle Screen')),
+    return ListView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      children: const <Widget>[
+        AddListingBasicInfoSection(),
+        AddListingPostButtonWidget(),
+      ],
     );
   }
 }

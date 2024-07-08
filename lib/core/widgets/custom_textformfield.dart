@@ -18,6 +18,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines = 1,
     this.isExpanded = false,
     this.maxLength,
+    this.prefixText,
     this.prefixIcon,
     this.suffixIcon,
     this.showSuffixIcon = false,
@@ -34,6 +35,7 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onChanged;
   final String? Function(String? value)? validator;
   final void Function(String)? onFieldSubmitted;
+  final String? prefixText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool showSuffixIcon;
@@ -111,14 +113,16 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
             cursorColor: Theme.of(context).colorScheme.secondary,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-              filled: true,
-              fillColor: widget.color ??
-                  Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .color!
-                      .withOpacity(0.05),
+              // filled: true,
+              // fillColor: widget.color ??
+              //     Theme.of(context)
+              //         .textTheme
+              //         .bodyLarge!
+              //         .color!
+              //         .withOpacity(0.05),
               hintText: widget.hint,
+              prefixText:
+                  widget.prefixText == null ? null : '${widget.prefixText!} ',
               prefixIcon: widget.prefixIcon,
               hintStyle: TextStyle(color: Colors.grey.shade400),
               suffixIcon: widget.suffixIcon ??
