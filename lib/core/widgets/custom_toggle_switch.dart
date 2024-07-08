@@ -56,6 +56,9 @@ class CustomToggleSwitch<T> extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: borderRadius,
+                      color: isSelected
+                          ? Theme.of(context).primaryColor.withOpacity(0.05)
+                          : Colors.transparent,
                       border: Border.all(
                         color: isSelected
                             ? Theme.of(context).primaryColor

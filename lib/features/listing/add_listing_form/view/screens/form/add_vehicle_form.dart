@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/add_listing_basic_info_section.dart';
-import '../../widgets/add_listing_post_button_widget.dart';
+import '../../widgets/core/add_listing_basic_info_section.dart';
+import '../../widgets/core/add_listing_post_button_widget.dart';
 
 class AddVehicleForm extends StatelessWidget {
   const AddVehicleForm({super.key});

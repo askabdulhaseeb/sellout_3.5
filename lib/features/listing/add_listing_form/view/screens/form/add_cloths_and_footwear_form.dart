@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../../../../core/utilities/app_validators.dart';
 import '../../../../../../core/widgets/custom_textformfield.dart';
 import '../../providers/add_listing_form_provider.dart';
-import '../../widgets/add_listing_basic_info_section.dart';
-import '../../widgets/add_listing_post_button_widget.dart';
+import '../../widgets/core/add_listing_basic_info_section.dart';
+import '../../widgets/core/add_listing_post_button_widget.dart';
 import '../../widgets/add_listing_price_and_quantity_widget.dart';
 
 class AddClothsAndFootwearForm extends StatelessWidget {

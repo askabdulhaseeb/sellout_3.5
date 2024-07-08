@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/utilities/app_validators.dart';
-import '../../../../../core/widgets/custom_textformfield.dart';
-import '../providers/add_listing_form_provider.dart';
-import 'attachment_selection/add_listing_attachment_selection_widget.dart';
+import '../../../../../../core/utilities/app_validators.dart';
+import '../../../../../../core/widgets/custom_textformfield.dart';
+import '../../providers/add_listing_form_provider.dart';
+import '../attachment_selection/add_listing_attachment_selection_widget.dart';
 
 class AddListingBasicInfoSection extends StatelessWidget {
   const AddListingBasicInfoSection({super.key});

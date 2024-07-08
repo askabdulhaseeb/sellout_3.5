@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/add_listing_basic_info_section.dart';
-import '../../widgets/add_listing_post_button_widget.dart';
+import '../../widgets/core/add_listing_basic_info_section.dart';
+import '../../widgets/core/add_listing_condition_offer_section.dart';
+import '../../widgets/core/add_listing_post_button_widget.dart';
+import '../../widgets/property/add_listing_property_bed_bath_widget.dart';
+import '../../widgets/property/add_property_gpa_widget.dart';
 
 class AddPropertyForm extends StatelessWidget {
   const AddPropertyForm({super.key});
@@ -12,6 +15,9 @@ class AddPropertyForm extends StatelessWidget {
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       children: const <Widget>[
         AddListingBasicInfoSection(),
+        AddListingPropertyBedBathWidget(),
+        AddPropertyGPAWidget(),
+        AddListingConditionOfferSection(),
         AddListingPostButtonWidget(),
       ],
     );

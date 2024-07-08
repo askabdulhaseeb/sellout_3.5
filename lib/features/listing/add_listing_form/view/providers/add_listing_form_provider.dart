@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../../../../core/enums/listing/listing_type.dart';
 import '../../../../../core/enums/listing/product_condition_type.dart';
 import '../../../../../core/enums/listing/product_delivery_type.dart';
 import '../../../../../core/enums/listing/product_privacy_type.dart';
+import '../../../../../core/enums/listing/product_time_type.dart';
 
 class AddListingFormProvider extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {
@@ -61,6 +64,38 @@ class AddListingFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Property
+  void setGarden(bool? value) {
+    if (value == null) return;
+    _garden = value;
+    notifyListeners();
+  }
+
+  void setParking(bool? value) {
+    if (value == null) return;
+    _parking = value;
+    notifyListeners();
+  }
+
+  void setAnimalFriendly(bool? value) {
+    if (value == null) return;
+    _animalFriendly = value;
+    notifyListeners();
+  }
+
+  // Pet
+  void setAge(ProductTimeType? value) {
+    if (value == null) return;
+    _age = value;
+    notifyListeners();
+  }
+
+  void setTime(ProductTimeType? value) {
+    if (value == null) return;
+    _time = value;
+    notifyListeners();
+  }
+
   void setLoading(bool value) {
     _isLoading = value;
     notifyListeners();
@@ -74,6 +109,16 @@ class AddListingFormProvider extends ChangeNotifier {
   bool get acceptOffer => _acceptOffer;
   ProductPrivacyType get privacy => _privacy;
   ProductDeliveryType get deliveryType => _deliveryType;
+  // Property
+  TextEditingController get bedroom => _bedroom;
+  TextEditingController get bathroom => _bathroom;
+  bool get garden => _garden;
+  bool get parking => _parking;
+  bool get animalFriendly => _animalFriendly;
+  // Pet
+  ProductTimeType? get age => _age;
+  ProductTimeType get time => _time;
+
   bool get isLoading => _isLoading;
   //
   TextEditingController get title => _title;
@@ -92,6 +137,15 @@ class AddListingFormProvider extends ChangeNotifier {
   bool _acceptOffer = true;
   ProductPrivacyType _privacy = ProductPrivacyType.public;
   ProductDeliveryType _deliveryType = ProductDeliveryType.delivery;
+  // Property
+  TextEditingController _bedroom = TextEditingController();
+  TextEditingController _bathroom = TextEditingController();
+  bool _garden = true;
+  bool _parking = true;
+  bool _animalFriendly = true;
+  // Pet
+  ProductTimeType? _age;
+  ProductTimeType _time = ProductTimeType.readyToLeave;
   bool _isLoading = false;
   //
   final TextEditingController _title = TextEditingController();
