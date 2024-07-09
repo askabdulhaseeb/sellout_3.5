@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../review/domain/entities/review_entity.dart';
+import '../../providers/add_listing_form_provider.dart';
 
 class AddListingAttachmentSelectionButton extends StatelessWidget {
   const AddListingAttachmentSelectionButton({super.key});
@@ -8,16 +12,26 @@ class AddListingAttachmentSelectionButton extends StatelessWidget {
     return Row(
       children: <Widget>[
         button(
-          icon: Icons.photo_outlined,
-          text: 'Add Photos',
-          onPressed: () {},
-        ),
+            icon: Icons.photo_outlined,
+            text: 'Add Photos',
+            onPressed: () async => await Provider.of<AddListingFormProvider>(
+                        context,
+                        listen: false)
+                    .setImages(
+                  context,
+                  type: AttachmentType.image,
+                )),
         const SizedBox(width: 16),
         button(
-          icon: Icons.videocam_outlined,
-          text: 'Add Videos',
-          onPressed: () {},
-        ),
+            icon: Icons.videocam_outlined,
+            text: 'Add Videos',
+            onPressed: () async => await Provider.of<AddListingFormProvider>(
+                        context,
+                        listen: false)
+                    .setImages(
+                  context,
+                  type: AttachmentType.video,
+                )),
       ],
     );
   }

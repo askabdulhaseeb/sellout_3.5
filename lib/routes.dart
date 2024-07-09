@@ -40,7 +40,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   AddListingFormScreen.routeName: (_) => const AddListingFormScreen(),
   //
   // Pick Attachment
-  PickableAttachmentScreen.routeName: (_) => const PickableAttachmentScreen(),
+  PickableAttachmentScreen.routeName: (_) => PickableAttachmentScreen(),
   //
   /// Reviews
   DisplayReviewsListScreen.routeName: (_) => const DisplayReviewsListScreen(),

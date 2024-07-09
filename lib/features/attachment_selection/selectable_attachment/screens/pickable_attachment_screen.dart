@@ -4,12 +4,16 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/widgets/loader.dart';
+import '../domain/pickable_attachment_option.dart';
 import '../providers/picked_media_provider.dart';
 import '../view/picked_media_display_limits_widget.dart';
 import '../view/picked_media_display_tile.dart';
 
 class PickableAttachmentScreen extends StatefulWidget {
-  const PickableAttachmentScreen({super.key});
+  PickableAttachmentScreen({PickableAttachmentOption? option, super.key})
+      : option = option ?? PickableAttachmentOption();
+  final PickableAttachmentOption option;
+
   static const String routeName = '/selectable-attachment';
 
   @override
@@ -34,6 +38,9 @@ class _PickableAttachmentScreenState extends State<PickableAttachmentScreen> {
   @override
   void initState() {
     super.initState();
+    // Provider.of<PickedMediaProvider>(context, listen: false).setOption(
+    //   widget.option ?? PickableAttachmentOption(),
+    // );
     _requestPermissionAndLoad();
   }
 
@@ -51,8 +58,10 @@ class _PickableAttachmentScreenState extends State<PickableAttachmentScreen> {
 
   Future<void> _loadMoreMedia() async {
     if (_currentPage == _lastPage && !_isLoading) return;
+    RequestType type = widget.option.type.requestType;
+    log('Selected type: $type');
     final List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(
-      type: RequestType.all,
+      type: type,
       filterOption: FilterOptionGroup(
         imageOption: const FilterOption(
           sizeConstraint: SizeConstraint(
@@ -60,11 +69,13 @@ class _PickableAttachmentScreenState extends State<PickableAttachmentScreen> {
             minHeight: 100,
           ),
         ),
-        videoOption: const FilterOption(
-          sizeConstraint: SizeConstraint(
+        videoOption: FilterOption(
+          sizeConstraint: const SizeConstraint(
             minWidth: 100,
             minHeight: 100,
           ),
+          durationConstraint:
+              DurationConstraint(max: widget.option.maxVideoDuration),
         ),
         orders: <OrderOption>[
           const OrderOption(type: OrderOptionType.createDate, asc: false),

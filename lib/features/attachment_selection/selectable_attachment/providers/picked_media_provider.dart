@@ -3,22 +3,35 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 
+import '../../../../core/enums/core/attachment_type.dart';
+import '../domain/pickable_attachment_option.dart';
+import '../domain/picked_attachment.dart';
+
 class PickedMediaProvider extends ChangeNotifier {
-  Future<List<File>> onSubmit(BuildContext context) async {
-    final List<File> files = <File>[];
+  Future<void> onSubmit(BuildContext context) async {
+    final List<PickedAttachment> attachmentss = <PickedAttachment>[];
     for (final AssetEntity media in _pickedMedia) {
       final File? file = await media.file;
-      if (file != null) files.add(file);
+      if (file == null) continue;
+      final AttachmentType type = media.type == AssetType.image
+          ? AttachmentType.image
+          : AttachmentType.video;
+      final PickedAttachment attachment = PickedAttachment(
+        file: file,
+        type: type,
+        selectedMedia: _pickedMedia,
+      );
+      attachmentss.add(attachment);
     }
     clearMedia();
     // ignore: use_build_context_synchronously
-    Navigator.of(context).pop(files);
-    return files;
+    Navigator.of(context).pop(attachmentss);
   }
 
   // Setters
-  void setMaxSelectable(int value) {
-    _maxSelectable = value;
+
+  void setOption(PickableAttachmentOption value) {
+    _option = value;
     notifyListeners();
   }
 
@@ -34,7 +47,7 @@ class PickedMediaProvider extends ChangeNotifier {
 
   void onTap(AssetEntity? value) {
     if (value == null) return;
-    if (_pickedMedia.length > _maxSelectable) return;
+    if (_pickedMedia.length > _option.maxAttachments) return;
 
     if (_pickedMedia.contains(value)) {
       removeMedia(value);
@@ -55,10 +68,10 @@ class PickedMediaProvider extends ChangeNotifier {
 
   // Getters
   List<AssetEntity> get pickedMedia => _pickedMedia;
-  int get maxSelectable => _maxSelectable;
-  String get selectionStr => '${_pickedMedia.length}/$_maxSelectable';
+  PickableAttachmentOption get option => _option;
+  String get selectionStr => '${_pickedMedia.length}/${_option.maxAttachments}';
 
   // Controllers
   final List<AssetEntity> _pickedMedia = <AssetEntity>[];
-  int _maxSelectable = 10;
+  PickableAttachmentOption _option = PickableAttachmentOption();
 }

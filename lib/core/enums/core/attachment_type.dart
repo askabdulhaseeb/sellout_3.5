@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 part 'attachment_type.g.dart';
 
@@ -13,7 +14,9 @@ enum AttachmentType {
   @HiveField(3)
   document('document', 'document'),
   @HiveField(4)
-  other('other', 'other');
+  other('other', 'other'),
+  @HiveField(5)
+  media('media', 'Media');
 
   const AttachmentType(this.json, this.title);
 
@@ -33,6 +36,21 @@ enum AttachmentType {
         return AttachmentType.document;
       default:
         return AttachmentType.other;
+    }
+  }
+
+  RequestType get requestType {
+    switch (this) {
+      case AttachmentType.image:
+        return RequestType.image;
+      case AttachmentType.video:
+        return RequestType.video;
+      case AttachmentType.audio:
+        return RequestType.audio;
+      case AttachmentType.document:
+        return RequestType.all;
+      default:
+        return RequestType.all;
     }
   }
 }

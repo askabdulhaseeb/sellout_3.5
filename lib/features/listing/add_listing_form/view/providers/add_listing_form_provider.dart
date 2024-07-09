@@ -1,15 +1,15 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
+import '../../../../../core/enums/core/attachment_type.dart';
 import '../../../../../core/enums/listing/listing_type.dart';
 import '../../../../../core/enums/listing/product_condition_type.dart';
 import '../../../../../core/enums/listing/product_delivery_type.dart';
 import '../../../../../core/enums/listing/product_privacy_type.dart';
 import '../../../../../core/enums/listing/pet/product_time_type.dart';
 import '../../../../../core/enums/listing/vehicle/transmission_type.dart';
+import '../../../../attachment_selection/selectable_attachment/domain/pickable_attachment_option.dart';
+import '../../../../attachment_selection/selectable_attachment/domain/picked_attachment.dart';
+import '../../../../attachment_selection/selectable_attachment/screens/pickable_attachment_screen.dart';
 
 class AddListingFormProvider extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {
@@ -25,8 +25,30 @@ class AddListingFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setImages(List<File> value) {
-    _images = value;
+  Future<void> setImages(
+    BuildContext context, {
+    required AttachmentType type,
+  }) async {
+    final List<PickedAttachment>? files =
+        await Navigator.of(context).push<List<PickedAttachment>>(
+      MaterialPageRoute<List<PickedAttachment>>(builder: (_) {
+        return PickableAttachmentScreen(
+          option: PickableAttachmentOption(
+            maxAttachments: 10,
+            allowMultiple: true,
+            type: type,
+          ),
+        );
+      }),
+    );
+    if (files != null) {
+      _attachments.addAll(files);
+    }
+    notifyListeners();
+  }
+
+  void removeAttachment(PickedAttachment attachment) {
+    _attachments.remove(attachment);
     notifyListeners();
   }
 
@@ -112,7 +134,7 @@ class AddListingFormProvider extends ChangeNotifier {
   //
   /// Getter
   ListingType? get listingType => _listingType ?? ListingType.item;
-  List<File> get images => _images;
+  List<PickedAttachment> get attachments => _attachments;
   ProductConditionType get condition => _condition;
   bool get acceptOffer => _acceptOffer;
   ProductPrivacyType get privacy => _privacy;
@@ -142,7 +164,6 @@ class AddListingFormProvider extends ChangeNotifier {
   //
   /// Controller
   ListingType? _listingType;
-  List<File> _images = <File>[];
   // Selected Category
   // Size and Color
   ProductConditionType _condition = ProductConditionType.newC;
@@ -165,6 +186,7 @@ class AddListingFormProvider extends ChangeNotifier {
   ProductTimeType _time = ProductTimeType.readyToLeave;
   bool _isLoading = false;
   //
+  List<PickedAttachment> _attachments = <PickedAttachment>[];
   final TextEditingController _title = TextEditingController();
   final TextEditingController _description = TextEditingController();
   final TextEditingController _price = TextEditingController();

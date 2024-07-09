@@ -24,6 +24,12 @@ class AddListingDeliverySelectionWidget extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.w500),
           ),
           CustomRadioButtonListTile<ProductDeliveryType>(
+            title: ProductDeliveryType.freeDelivery.title,
+            selectedValue: formPro.deliveryType,
+            value: ProductDeliveryType.freeDelivery,
+            onChanged: formPro.setDeliveryType,
+          ),
+          CustomRadioButtonListTile<ProductDeliveryType>(
             title: ProductDeliveryType.delivery.title,
             selectedValue: formPro.deliveryType,
             value: ProductDeliveryType.delivery,
@@ -36,12 +42,6 @@ class AddListingDeliverySelectionWidget extends StatelessWidget {
                 prefixText: LocalState.getCurrency(),
               ),
             ),
-          ),
-          CustomRadioButtonListTile<ProductDeliveryType>(
-            title: ProductDeliveryType.freeDelivery.title,
-            selectedValue: formPro.deliveryType,
-            value: ProductDeliveryType.freeDelivery,
-            onChanged: formPro.setDeliveryType,
           ),
           CustomRadioButtonListTile<ProductDeliveryType>(
             title: ProductDeliveryType.collocation.title,
