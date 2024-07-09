@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'features/attachment_selection/selectable_attachment/screens/pickable_attachment_screen.dart';
 import 'features/auth/account_type_section/view/screens/account_type_selection_screen.dart';
 import 'features/auth/phone_number_opt_varification/view/screens/phone_number_opt_varification_screen.dart';
 import 'features/auth/signin/view/screens/signin_screen.dart';
@@ -37,6 +38,9 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   /// Listing
   AddListingScreen.routeName: (_) => const AddListingScreen(),
   AddListingFormScreen.routeName: (_) => const AddListingFormScreen(),
+  //
+  // Pick Attachment
+  PickableAttachmentScreen.routeName: (_) => const PickableAttachmentScreen(),
   //
   /// Reviews
   DisplayReviewsListScreen.routeName: (_) => const DisplayReviewsListScreen(),

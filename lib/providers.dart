@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+import 'features/attachment_selection/selectable_attachment/providers/picked_media_provider.dart';
 import 'features/auth/signin/view/providers/signin_provider.dart';
 import 'features/auth/signup/view/providers/signup_provider.dart';
 import 'features/dashboard/view/providers/app_nav_bar_provider.dart';
@@ -15,4 +16,7 @@ final List<SingleChildWidget> providers = <SingleChildWidget>[
   //
   ChangeNotifierProvider<AddListingFormProvider>.value(
       value: AddListingFormProvider()),
+  //
+  ChangeNotifierProvider<PickedMediaProvider>.value(
+      value: PickedMediaProvider()),
 ];

@@ -26,7 +26,7 @@ class AddListingBasicInfoSection extends StatelessWidget {
             const SizedBox(height: 16),
             const AddListingAttachmentSelectionWidget(),
             CustomTextFormField(
-              controller: formPro.title,
+              controller: formPro.description,
               hint: 'Enter product Description...',
               isExpanded: true,
               maxLines: 5,

@@ -24,6 +24,9 @@ class AddListingFormScreen extends StatelessWidget {
                   ?.display ??
               'Select Type',
         ),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
