@@ -79,11 +79,12 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            widget.labelText,
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          ),
-          const SizedBox(height: 2),
+          if (widget.labelText.isNotEmpty)
+            Text(
+              widget.labelText,
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
+          if (widget.labelText.isNotEmpty) const SizedBox(height: 2),
           TextFormField(
             initialValue: widget.initialValue,
             controller: widget._controller,

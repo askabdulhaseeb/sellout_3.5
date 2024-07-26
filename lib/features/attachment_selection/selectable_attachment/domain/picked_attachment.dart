@@ -13,5 +13,5 @@ class PickedAttachment {
 
   final File file;
   final AttachmentType type;
-  final List<AssetEntity>? selectedMedia;
+  final AssetEntity? selectedMedia;
 }

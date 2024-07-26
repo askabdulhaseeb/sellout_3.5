@@ -5,6 +5,7 @@ import '../../../../../../core/enums/listing/product_delivery_type.dart';
 import '../../../../../../core/sources/local/core/local_state.dart';
 import '../../../../../../core/widgets/custom_radio_button_list_tile.dart';
 import '../../../../../../core/widgets/custom_textformfield.dart';
+import '../../../../../../core/widgets/location_input_button.dart';
 import '../../providers/add_listing_form_provider.dart';
 
 class AddListingDeliverySelectionWidget extends StatelessWidget {
@@ -34,13 +35,18 @@ class AddListingDeliverySelectionWidget extends StatelessWidget {
             selectedValue: formPro.deliveryType,
             value: ProductDeliveryType.delivery,
             onChanged: formPro.setDeliveryType,
-            trailing: Expanded(
-              child: CustomTextFormField(
-                controller: formPro.deliveryFee,
-                keyboardType: TextInputType.number,
-                hint: 'Delivery Fee',
-                prefixText: LocalState.getCurrency(),
-              ),
+            subtitle: CustomTextFormField(
+              controller: formPro.deliveryFee,
+              keyboardType: TextInputType.number,
+              hint: 'Delivery Fee',
+              autoFocus: true,
+              prefixText: LocalState.getCurrency(),
+              contentPadding: EdgeInsets.zero,
+              validator: (String? value) =>
+                  formPro.deliveryType == ProductDeliveryType.delivery &&
+                          (value?.isEmpty ?? true)
+                      ? 'Delivery Fee is required'
+                      : null,
             ),
           ),
           CustomRadioButtonListTile<ProductDeliveryType>(
@@ -48,6 +54,13 @@ class AddListingDeliverySelectionWidget extends StatelessWidget {
             selectedValue: formPro.deliveryType,
             value: ProductDeliveryType.collocation,
             onChanged: formPro.setDeliveryType,
+            subtitle: LocationInputButton(
+              validator: (bool? value) =>
+                  formPro.deliveryType == ProductDeliveryType.collocation &&
+                          (value == null)
+                      ? 'Location is required'
+                      : null,
+            ),
           ),
         ],
       );

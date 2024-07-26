@@ -6,14 +6,14 @@ class CustomRadioButtonListTile<T> extends StatelessWidget {
     required this.selectedValue,
     required this.value,
     required this.onChanged,
-    this.trailing,
+    this.subtitle,
     super.key,
   });
   final String title;
   final T selectedValue;
   final T value;
   final void Function(T) onChanged;
-  final Widget? trailing;
+  final Widget? subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +25,23 @@ class CustomRadioButtonListTile<T> extends StatelessWidget {
         padding: isSelected
             ? const EdgeInsets.symmetric(horizontal: 8)
             : const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Icon(
-              isSelected ? Icons.check_box : Icons.check_box_outline_blank,
-              color: Theme.of(context).primaryColor,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(
+                  isSelected ? Icons.check_box : Icons.check_box_outline_blank,
+                  color: Theme.of(context).primaryColor,
+                ),
+                const SizedBox(width: 8),
+                Text(title),
+              ],
             ),
-            const SizedBox(width: 8),
-            Text(title),
-            if (trailing != null) const SizedBox(width: 12),
-            if (trailing != null && isSelected) trailing!,
+            if (subtitle != null && isSelected)
+              subtitle ?? const Text('Something went wrong'),
           ],
         ),
       ),

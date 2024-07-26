@@ -16,23 +16,13 @@ class AppValidator {
   }
 
   static String? isEmpty(String? value) {
-    return (value!.isEmpty) ? 'Field could not be empty' : null;
+    return (value?.isEmpty ?? true) ? 'Field could not be empty' : null;
   }
 
-  static String? lessThen2(String? value) {
-    return (value!.length < 2) ? 'Enter more then 1 characters' : null;
-  }
-
-  static String? lessThen3(String? value) {
-    return (value!.length < 3) ? 'Enter more then 2 characters' : null;
-  }
-
-  static String? lessThen4(String? value) {
-    return (value!.length < 4) ? 'Enter more then 3 characters' : null;
-  }
-
-  static String? lessThen5(String? value) {
-    return (value!.length < 5) ? 'Enter more then 4 characters' : null;
+  static String? lessThenDigits(String? value, int digits) {
+    return ((value?.length ?? 0) < digits)
+        ? 'Enter more then $digits characters'
+        : null;
   }
 
   static String? greaterThen(String? input, double compairWith) {

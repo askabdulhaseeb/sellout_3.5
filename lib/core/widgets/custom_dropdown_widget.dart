@@ -2,45 +2,60 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdown<T> extends StatefulWidget {
-  const CustomDropdown({
+class CustomDropdown<T> extends FormField<bool> {
+  CustomDropdown({
     required this.title,
     required this.items,
     required this.selectedItem,
     required this.onChanged,
     this.validation,
     super.key,
-  });
+  }) : super(
+          builder: (FormFieldState<bool> state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Checkbox(
+                      value: state.value,
+                      onChanged: (bool? value) {
+                        state.didChange(value);
+                      },
+                    ),
+                    const Text('label'),
+                  ],
+                ),
+                if (state.hasError)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      state.errorText!,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+              ],
+            );
+          },
+        );
   final String title;
   final void Function(T?)? onChanged;
   final T? selectedItem;
   final List<DropdownMenuItem<T>> items;
   final String? validation;
 
-  @override
-  State<CustomDropdown<T>> createState() => _CustomDropdownState<T>();
-}
-
-class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
   final TextEditingController _search = TextEditingController();
 
-  @override
-  void dispose() {
-    _search.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return widget.items.isEmpty
+    return items.isEmpty
         ? kDebugMode
-            ? Text('${widget.title} is disabled - display only in testing Mode')
+            ? Text('$title is disabled - display only in testing Mode')
             : const SizedBox()
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                widget.title,
+                title,
                 style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 4),
@@ -60,9 +75,9 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                         color: Theme.of(context).hintColor,
                       ),
                     ),
-                    items: widget.items,
-                    value: widget.selectedItem,
-                    onChanged: widget.onChanged,
+                    items: items,
+                    value: selectedItem,
+                    onChanged: onChanged,
                     buttonStyleData: const ButtonStyleData(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                     ),
@@ -122,10 +137,10 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                   ),
                 ),
               ),
-              if (widget.validation == null) const SizedBox(height: 2),
-              if (widget.validation != null)
+              if (validation == null) const SizedBox(height: 2),
+              if (validation != null)
                 Text(
-                  widget.validation ?? 'NA',
+                  validation ?? 'NA',
                   style: const TextStyle(color: Colors.red),
                 ),
             ],

@@ -19,7 +19,7 @@ class PickedMediaProvider extends ChangeNotifier {
       final PickedAttachment attachment = PickedAttachment(
         file: file,
         type: type,
-        selectedMedia: _pickedMedia,
+        selectedMedia: media,
       );
       attachmentss.add(attachment);
     }
@@ -32,6 +32,7 @@ class PickedMediaProvider extends ChangeNotifier {
 
   void setOption(PickableAttachmentOption value) {
     _option = value;
+    _pickedMedia.addAll(value.selectedMedia ?? <AssetEntity>[]);
     notifyListeners();
   }
 
@@ -48,10 +49,10 @@ class PickedMediaProvider extends ChangeNotifier {
   void onTap(AssetEntity? value) {
     if (value == null) return;
     if (_pickedMedia.length > _option.maxAttachments) return;
-
-    if (_pickedMedia.contains(value)) {
+    final bool isOld = _option.selectedMedia?.contains(value) ?? false;
+    if (_pickedMedia.contains(value) && !isOld) {
       removeMedia(value);
-    } else {
+    } else if (!isOld) {
       addMedia(value);
     }
   }

@@ -7,6 +7,7 @@ import '../../../../../../core/sources/local/core/local_state.dart';
 import '../../../../../../core/utilities/app_validators.dart';
 import '../../../../../../core/widgets/custom_textformfield.dart';
 import '../../../../../../core/widgets/custom_toggle_switch.dart';
+import '../../../data/sources/get_access_code_api.dart';
 import '../../providers/add_listing_form_provider.dart';
 
 class AddListingConditionOfferSection extends StatelessWidget {
@@ -55,6 +56,37 @@ class AddListingConditionOfferSection extends StatelessWidget {
               initialValue: formPro.privacy,
               onToggle: formPro.setPrivacy,
             ),
+            if (formPro.privacy == ProductPrivacyType.private)
+              FutureBuilder<String?>(
+                future: GetAccessCodeApi().getCode(oldCode: formPro.accessCode),
+                initialData: formPro.accessCode,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<String?> snapshot,
+                ) {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    formPro.setAccessCode(snapshot.data!);
+                  }
+                  return Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor.withOpacity(0.06),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      'Access code: ${snapshot.data ?? '...'}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                },
+              ),
           ],
         );
       },

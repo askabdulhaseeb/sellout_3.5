@@ -13,9 +13,109 @@ import '../../../../attachment_selection/selectable_attachment/screens/pickable_
 
 class AddListingFormProvider extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {
-    setLoading(true);
-    await Future<void>.delayed(const Duration(seconds: 2));
+    if (_attachments.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Please add at least one Photo or Video'),
+      ));
+      return;
+    }
+    switch (listingType) {
+      case ListingType.item:
+        await _onItemSubmit();
+        break;
+      case ListingType.clothesAndFoot:
+        await _onClothesAndFootSubmit();
+        break;
+      case ListingType.vehicles:
+        await _onVehicleSubmit();
+        break;
+      case ListingType.foodAndDrinks:
+        await _onFoodAndDrinkSubmit();
+        break;
+
+      case ListingType.properties:
+        await _onPropertySubmit();
+        break;
+      case ListingType.pet:
+        await _onPetSubmit();
+        break;
+      default:
+        break;
+    }
     setLoading(false);
+  }
+
+  Future<void> reset() async {
+    _attachments.clear();
+    _title.clear();
+    _description.clear();
+    _price.clear();
+    _quantity.clear();
+    _minimumOffer.clear();
+    _deliveryFee.clear();
+    _accessCode = '';
+    _engineSize.clear();
+    _mileage.clear();
+    _bedroom.clear();
+    _bathroom.clear();
+    _garden = true;
+    _parking = true;
+    _animalFriendly = true;
+    _age = null;
+    _time = ProductTimeType.readyToLeave;
+    _condition = ProductConditionType.newC;
+    _acceptOffer = true;
+    _privacy = ProductPrivacyType.public;
+    _deliveryType = ProductDeliveryType.delivery;
+    notifyListeners();
+  }
+
+  Future<void> _onItemSubmit() async {
+    if (_itemKey.currentState?.validate() ?? false) {
+      setLoading(true);
+      await Future<void>.delayed(const Duration(seconds: 2));
+      setLoading(false);
+    }
+  }
+
+  Future<void> _onClothesAndFootSubmit() async {
+    if (_clothesAndFootKey.currentState?.validate() ?? false) {
+      setLoading(true);
+      await Future<void>.delayed(const Duration(seconds: 2));
+      setLoading(false);
+    }
+  }
+
+  Future<void> _onVehicleSubmit() async {
+    if (_vehicleKey.currentState?.validate() ?? false) {
+      setLoading(true);
+      await Future<void>.delayed(const Duration(seconds: 2));
+      setLoading(false);
+    }
+  }
+
+  Future<void> _onFoodAndDrinkSubmit() async {
+    if (_foodAndDrinkKey.currentState?.validate() ?? false) {
+      setLoading(true);
+      await Future<void>.delayed(const Duration(seconds: 2));
+      setLoading(false);
+    }
+  }
+
+  Future<void> _onPropertySubmit() async {
+    if (_propertyKey.currentState?.validate() ?? false) {
+      setLoading(true);
+      await Future<void>.delayed(const Duration(seconds: 2));
+      setLoading(false);
+    }
+  }
+
+  Future<void> _onPetSubmit() async {
+    if (_petKey.currentState?.validate() ?? false) {
+      setLoading(true);
+      await Future<void>.delayed(const Duration(seconds: 2));
+      setLoading(false);
+    }
   }
 
   //
@@ -29,6 +129,10 @@ class AddListingFormProvider extends ChangeNotifier {
     BuildContext context, {
     required AttachmentType type,
   }) async {
+    final List<PickedAttachment> selectedMedia =
+        _attachments.where((PickedAttachment element) {
+      return element.selectedMedia != null;
+    }).toList();
     final List<PickedAttachment>? files =
         await Navigator.of(context).push<List<PickedAttachment>>(
       MaterialPageRoute<List<PickedAttachment>>(builder: (_) {
@@ -37,14 +141,23 @@ class AddListingFormProvider extends ChangeNotifier {
             maxAttachments: 10,
             allowMultiple: true,
             type: type,
+            selectedMedia: selectedMedia
+                .map((PickedAttachment e) => e.selectedMedia!)
+                .toList(),
           ),
         );
       }),
     );
     if (files != null) {
-      _attachments.addAll(files);
+      for (final PickedAttachment file in files) {
+        final int index = _attachments.indexWhere((PickedAttachment element) =>
+            element.selectedMedia == file.selectedMedia);
+        if (index == -1) {
+          _attachments.add(file);
+        }
+      }
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   void removeAttachment(PickedAttachment attachment) {
@@ -126,6 +239,12 @@ class AddListingFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setAccessCode(String? value) {
+    if (value == null) return;
+    _accessCode = value;
+    // notifyListeners();
+  }
+
   void setLoading(bool value) {
     _isLoading = value;
     notifyListeners();
@@ -161,6 +280,15 @@ class AddListingFormProvider extends ChangeNotifier {
   TextEditingController get quantity => _quantity;
   TextEditingController get minimumOffer => _minimumOffer;
   TextEditingController get deliveryFee => _deliveryFee;
+  String get accessCode => _accessCode;
+
+  GlobalKey<FormState> get itemKey => _itemKey;
+  GlobalKey<FormState> get clothesAndFootKey => _clothesAndFootKey;
+  GlobalKey<FormState> get vehicleKey => _vehicleKey;
+  GlobalKey<FormState> get foodAndDrinkKey => _foodAndDrinkKey;
+  GlobalKey<FormState> get propertyKey => _propertyKey;
+  GlobalKey<FormState> get petKey => _petKey;
+
   //
   /// Controller
   ListingType? _listingType;
@@ -186,11 +314,20 @@ class AddListingFormProvider extends ChangeNotifier {
   ProductTimeType _time = ProductTimeType.readyToLeave;
   bool _isLoading = false;
   //
-  List<PickedAttachment> _attachments = <PickedAttachment>[];
+  final List<PickedAttachment> _attachments = <PickedAttachment>[];
   final TextEditingController _title = TextEditingController();
   final TextEditingController _description = TextEditingController();
   final TextEditingController _price = TextEditingController();
   final TextEditingController _quantity = TextEditingController(text: '1');
   final TextEditingController _minimumOffer = TextEditingController();
   final TextEditingController _deliveryFee = TextEditingController();
+  String _accessCode = '';
+
+  // Form State
+  final GlobalKey<FormState> _itemKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _clothesAndFootKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _vehicleKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _foodAndDrinkKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _propertyKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _petKey = GlobalKey<FormState>();
 }
