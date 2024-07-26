@@ -26,6 +26,8 @@ class AddListingPetAgeLeaveWidget extends StatelessWidget {
                   );
                 }).toList(),
                 onChanged: formPro.setAge,
+                validator: (_) =>
+                    formPro.age == null ? 'Age is required' : null,
                 title: 'Age',
               ),
             ),
@@ -40,6 +42,8 @@ class AddListingPetAgeLeaveWidget extends StatelessWidget {
                   );
                 }).toList(),
                 onChanged: formPro.setTime,
+                validator: (_) =>
+                    formPro.time == null ? 'Time is required' : null,
                 title: 'Ready to Leave',
               ),
             ),

@@ -15,17 +15,20 @@ class AddClothsAndFootwearForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AddListingFormProvider>(
       builder: (BuildContext context, AddListingFormProvider formPro, _) {
-        return ListView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          children: const <Widget>[
-            AddListingBasicInfoSection(),
-            // TODO: Category selection widget
-            // TODO: Size and Color selection widget
-            AddListingPriceAndQuantityWidget(readOnly: true),
-            AddListingConditionOfferSection(),
-            AddListingDeliverySelectionWidget(),
-            AddListingPostButtonWidget(),
-          ],
+        return Form(
+          key: formPro.clothesAndFootKey,
+          child: ListView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            children: const <Widget>[
+              AddListingBasicInfoSection(),
+              // TODO: Category selection widget
+              // TODO: Size and Color selection widget
+              AddListingPriceAndQuantityWidget(readOnly: true),
+              AddListingConditionOfferSection(),
+              AddListingDeliverySelectionWidget(),
+              AddListingPostButtonWidget(),
+            ],
+          ),
         );
       },
     );

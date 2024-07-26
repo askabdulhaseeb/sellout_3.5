@@ -71,51 +71,45 @@ class AddListingFormProvider extends ChangeNotifier {
   }
 
   Future<void> _onItemSubmit() async {
-    if (_itemKey.currentState?.validate() ?? false) {
-      setLoading(true);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      setLoading(false);
-    }
+    if (!(_itemKey.currentState?.validate() ?? false)) return;
+    setLoading(true);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    setLoading(false);
   }
 
   Future<void> _onClothesAndFootSubmit() async {
-    if (_clothesAndFootKey.currentState?.validate() ?? false) {
-      setLoading(true);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      setLoading(false);
-    }
+    if (!(_clothesAndFootKey.currentState?.validate() ?? false)) return;
+    setLoading(true);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    setLoading(false);
   }
 
   Future<void> _onVehicleSubmit() async {
-    if (_vehicleKey.currentState?.validate() ?? false) {
-      setLoading(true);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      setLoading(false);
-    }
+    if (!(_vehicleKey.currentState?.validate() ?? false)) return;
+    setLoading(true);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    setLoading(false);
   }
 
   Future<void> _onFoodAndDrinkSubmit() async {
-    if (_foodAndDrinkKey.currentState?.validate() ?? false) {
-      setLoading(true);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      setLoading(false);
-    }
+    if (!(_foodAndDrinkKey.currentState?.validate() ?? false)) return;
+    setLoading(true);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    setLoading(false);
   }
 
   Future<void> _onPropertySubmit() async {
-    if (_propertyKey.currentState?.validate() ?? false) {
-      setLoading(true);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      setLoading(false);
-    }
+    if (!(_propertyKey.currentState?.validate() ?? false)) return;
+    setLoading(true);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    setLoading(false);
   }
 
   Future<void> _onPetSubmit() async {
-    if (_petKey.currentState?.validate() ?? false) {
-      setLoading(true);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      setLoading(false);
-    }
+    if (!(_petKey.currentState?.validate() ?? false)) return;
+    setLoading(true);
+    await Future<void>.delayed(const Duration(seconds: 2));
+    setLoading(false);
   }
 
   //
@@ -270,7 +264,7 @@ class AddListingFormProvider extends ChangeNotifier {
   bool get animalFriendly => _animalFriendly;
   // Pet
   ProductTimeType? get age => _age;
-  ProductTimeType get time => _time;
+  ProductTimeType? get time => _time;
 
   bool get isLoading => _isLoading;
   //
@@ -311,7 +305,7 @@ class AddListingFormProvider extends ChangeNotifier {
   bool _animalFriendly = true;
   // Pet
   ProductTimeType? _age;
-  ProductTimeType _time = ProductTimeType.readyToLeave;
+  ProductTimeType? _time;
   bool _isLoading = false;
   //
   final List<PickedAttachment> _attachments = <PickedAttachment>[];

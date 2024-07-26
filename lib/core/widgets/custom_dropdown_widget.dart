@@ -8,29 +8,26 @@ class CustomDropdown<T> extends FormField<bool> {
     required this.items,
     required this.selectedItem,
     required this.onChanged,
-    this.validation,
+    required FormFieldValidator<bool> validator,
     super.key,
   }) : super(
+          validator: validator,
           builder: (FormFieldState<bool> state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Checkbox(
-                      value: state.value,
-                      onChanged: (bool? value) {
-                        state.didChange(value);
-                      },
-                    ),
-                    const Text('label'),
-                  ],
+                // ignore: always_specify_types
+                _Widget(
+                  title: title,
+                  items: items,
+                  selectedItem: selectedItem,
+                  onChanged: onChanged,
                 ),
                 if (state.hasError)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
-                      state.errorText!,
+                      state.errorText ?? '',
                       style: const TextStyle(color: Colors.red),
                     ),
                   ),
@@ -38,14 +35,38 @@ class CustomDropdown<T> extends FormField<bool> {
             );
           },
         );
+
   final String title;
   final void Function(T?)? onChanged;
   final T? selectedItem;
   final List<DropdownMenuItem<T>> items;
-  final String? validation;
 
+  Widget build(BuildContext context) {
+    // ignore: always_specify_types
+    return _Widget(
+      title: title,
+      items: items,
+      selectedItem: selectedItem,
+      onChanged: onChanged,
+    );
+  }
+}
+
+class _Widget<T> extends StatelessWidget {
+  _Widget({
+    required this.title,
+    required this.items,
+    required this.selectedItem,
+    required this.onChanged,
+    super.key,
+  });
+  final String title;
+  final void Function(T?)? onChanged;
+  final T? selectedItem;
+  final List<DropdownMenuItem<T>> items;
   final TextEditingController _search = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     return items.isEmpty
         ? kDebugMode
@@ -137,12 +158,6 @@ class CustomDropdown<T> extends FormField<bool> {
                   ),
                 ),
               ),
-              if (validation == null) const SizedBox(height: 2),
-              if (validation != null)
-                Text(
-                  validation ?? 'NA',
-                  style: const TextStyle(color: Colors.red),
-                ),
             ],
           );
   }
