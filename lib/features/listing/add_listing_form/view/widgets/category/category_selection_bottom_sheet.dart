@@ -13,7 +13,7 @@ class CategorySelectionBottomSheet extends StatefulWidget {
 
 class _CategorySelectionBottomSheetState
     extends State<CategorySelectionBottomSheet> {
-  SubCategoryEntity? selectedSubCategory;
+  List<SubCategoryEntity> selectedSubCategoryStack = <SubCategoryEntity>[];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +29,7 @@ class _CategorySelectionBottomSheetState
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),
-          selectedSubCategory == null
+          selectedSubCategoryStack.isEmpty
               ? const Opacity(
                   opacity: 0.5,
                   child: Text(
@@ -40,7 +40,19 @@ class _CategorySelectionBottomSheetState
                     ),
                   ),
                 )
-              : Text(selectedSubCategory?.address ?? ''),
+              : Row(
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedSubCategoryStack.removeLast();
+                        });
+                      },
+                      icon: const Icon(Icons.arrow_back_ios),
+                    ),
+                    Text(selectedSubCategoryStack.last.address ?? ''),
+                  ],
+                ),
           //
           const Divider(),
           //
@@ -48,19 +60,26 @@ class _CategorySelectionBottomSheetState
             child: ListView.builder(
               shrinkWrap: true,
               primary: false,
-              itemCount: selectedSubCategory?.subCategory.length ??
-                  widget.subCategories.length,
+              itemCount: selectedSubCategoryStack.isEmpty
+                  ? widget.subCategories.length
+                  : selectedSubCategoryStack.last.subCategory.length,
               itemBuilder: (BuildContext context, int index) {
                 final SubCategoryEntity subCategory =
-                    selectedSubCategory?.subCategory[index] ??
-                        widget.subCategories[index];
+                    selectedSubCategoryStack.isEmpty
+                        ? widget.subCategories[index]
+                        : selectedSubCategoryStack.last.subCategory[index];
                 return ListTile(
                   onTap: () {
-                    setState(() {
-                      selectedSubCategory = subCategory;
-                    });
+                    if (subCategory.subCategory.isEmpty) {
+                      Navigator.of(context).pop(subCategory);
+                      return;
+                    } else {
+                      setState(() {
+                        selectedSubCategoryStack.add(subCategory);
+                      });
+                    }
                   },
-                  title: Text(subCategory.address ?? ''),
+                  title: Text(subCategory.title),
                   trailing: subCategory.subCategory.isEmpty
                       ? const SizedBox()
                       : const Icon(Icons.arrow_forward_ios),

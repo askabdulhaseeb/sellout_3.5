@@ -21,8 +21,6 @@ class ApiRequestEntity {
 
   bool timesAgo(Duration duration) {
     if (lastRequest == null) return true;
-    debugPrint(
-        'Difference from Last to Now ${DateTime.now().difference(lastRequest!)}');
     debugPrint('Difference from Last to Now $duration');
     return lastRequest != null &&
         DateTime.now().difference(lastRequest!) > duration;

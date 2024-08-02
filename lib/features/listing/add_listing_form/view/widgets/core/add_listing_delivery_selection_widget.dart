@@ -31,9 +31,9 @@ class AddListingDeliverySelectionWidget extends StatelessWidget {
             onChanged: formPro.setDeliveryType,
           ),
           CustomRadioButtonListTile<ProductDeliveryType>(
-            title: ProductDeliveryType.delivery.title,
+            title: ProductDeliveryType.paid.title,
             selectedValue: formPro.deliveryType,
-            value: ProductDeliveryType.delivery,
+            value: ProductDeliveryType.paid,
             onChanged: formPro.setDeliveryType,
             subtitle: CustomTextFormField(
               controller: formPro.deliveryFee,
@@ -43,7 +43,7 @@ class AddListingDeliverySelectionWidget extends StatelessWidget {
               prefixText: LocalState.getCurrency(),
               contentPadding: EdgeInsets.zero,
               validator: (String? value) =>
-                  formPro.deliveryType == ProductDeliveryType.delivery &&
+                  formPro.deliveryType == ProductDeliveryType.paid &&
                           (value?.isEmpty ?? true)
                       ? 'Delivery Fee is required'
                       : null,

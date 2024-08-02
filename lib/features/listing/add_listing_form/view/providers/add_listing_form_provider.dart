@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/enums/core/attachment_type.dart';
@@ -12,6 +13,8 @@ import '../../../../attachment_selection/selectable_attachment/domain/pickable_a
 import '../../../../attachment_selection/selectable_attachment/domain/picked_attachment.dart';
 import '../../../../attachment_selection/selectable_attachment/screens/pickable_attachment_screen.dart';
 import '../../../add_listing/domain/entities/sub_category_entity.dart';
+import '../../data/param/add_listing_param.dart';
+import '../../data/sources/add_listing_api.dart';
 
 class AddListingFormProvider extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {
@@ -72,14 +75,37 @@ class AddListingFormProvider extends ChangeNotifier {
     _condition = ProductConditionType.newC;
     _acceptOffer = true;
     _privacy = ProductPrivacyType.public;
-    _deliveryType = ProductDeliveryType.delivery;
+    _deliveryType = ProductDeliveryType.paid;
     notifyListeners();
   }
 
   Future<void> _onItemSubmit() async {
     if (!(_itemKey.currentState?.validate() ?? false)) return;
     setLoading(true);
-    await Future<void>.delayed(const Duration(seconds: 2));
+    AddListingParam param = AddListingParam(
+      title: _title.text,
+      description: _description.text,
+      price: _price.text,
+      quantity: _quantity.text,
+      discount: true,
+      disc2Items: '5',
+      disc3Items: '0',
+      disc5Items: '0',
+      itemCondition: _condition.json,
+      acceptOffers: _acceptOffer,
+      minOfferAmount: _minimumOffer.text,
+      privacy: _privacy,
+      accessCode: _accessCode,
+      deliveryType: _deliveryType,
+      localDelivery: _deliveryFee.text,
+      internationalDelivery: '0',
+      listId: _listingType?.json ?? '',
+      address: _selectedCategory?.address ?? 'items',
+      currentLatitude: '0',
+      currentLongitude: '0',
+      attachments: _attachments,
+    );
+    await AddListingApi().addItem(param);
     setLoading(false);
   }
 
@@ -126,6 +152,7 @@ class AddListingFormProvider extends ChangeNotifier {
   }
 
   void setSelectedCategory(SubCategoryEntity? value) {
+    if (value == null) return;
     _selectedCategory = value;
     notifyListeners();
   }
@@ -305,7 +332,7 @@ class AddListingFormProvider extends ChangeNotifier {
   ProductConditionType _condition = ProductConditionType.newC;
   bool _acceptOffer = true;
   ProductPrivacyType _privacy = ProductPrivacyType.public;
-  ProductDeliveryType _deliveryType = ProductDeliveryType.delivery;
+  ProductDeliveryType _deliveryType = ProductDeliveryType.paid;
   // Vehicle
   TransmissionType _transmissionType = TransmissionType.auto;
   final TextEditingController _engineSize = TextEditingController();
@@ -323,12 +350,22 @@ class AddListingFormProvider extends ChangeNotifier {
   bool _isLoading = false;
   //
   final List<PickedAttachment> _attachments = <PickedAttachment>[];
-  final TextEditingController _title = TextEditingController();
-  final TextEditingController _description = TextEditingController();
-  final TextEditingController _price = TextEditingController();
+  final TextEditingController _title = TextEditingController(
+    text: kDebugMode ? 'Test Title' : '',
+  );
+  final TextEditingController _description = TextEditingController(
+    text: kDebugMode ? 'Test Description' : '',
+  );
+  final TextEditingController _price = TextEditingController(
+    text: kDebugMode ? '100' : '',
+  );
   final TextEditingController _quantity = TextEditingController(text: '1');
-  final TextEditingController _minimumOffer = TextEditingController();
-  final TextEditingController _deliveryFee = TextEditingController();
+  final TextEditingController _minimumOffer = TextEditingController(
+    text: kDebugMode ? '50' : '',
+  );
+  final TextEditingController _deliveryFee = TextEditingController(
+    text: kDebugMode ? '10' : '',
+  );
   String _accessCode = '';
 
   // Form State

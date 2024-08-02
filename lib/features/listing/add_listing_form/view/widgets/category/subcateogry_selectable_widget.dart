@@ -16,10 +16,12 @@ class SubCategorySelectableWidget extends StatelessWidget {
   const SubCategorySelectableWidget({
     required this.listType,
     required this.subCategory,
+    required this.onSelected,
     super.key,
   });
   final ListingType? listType;
   final SubCategoryEntity? subCategory;
+  final void Function(SubCategoryEntity?) onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,8 @@ class SubCategorySelectableWidget extends StatelessWidget {
                     AppSnackBar.showSnackBar(context, 'Something went wrong');
                     return;
                   }
-                  await showModalBottomSheet(
+                  final SubCategoryEntity? selectCat =
+                      await showModalBottomSheet(
                     context: context,
                     builder: (BuildContext context) {
                       return CategorySelectionBottomSheet(
@@ -65,6 +68,9 @@ class SubCategorySelectableWidget extends StatelessWidget {
                       );
                     },
                   );
+                  if (selectCat != null) {
+                    onSelected(selectCat);
+                  }
                 },
                 borderRadius: BorderRadius.circular(8),
                 child: Container(

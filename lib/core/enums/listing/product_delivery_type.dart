@@ -1,6 +1,6 @@
 enum ProductDeliveryType {
-  delivery('Paid Delivery', 'delivery'),
-  freeDelivery('Free Delivery', 'free_delivery'),
+  paid('Paid Delivery', 'paid'),
+  freeDelivery('Free Delivery', 'free'),
   collocation('Collection', 'collection');
 
   const ProductDeliveryType(this.title, this.json);

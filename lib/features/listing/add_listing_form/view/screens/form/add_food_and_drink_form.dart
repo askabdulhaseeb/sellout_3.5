@@ -14,23 +14,26 @@ class AddFoodAndDrinkForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: Provider.of<AddListingFormProvider>(context).foodAndDrinkKey,
-      child: ListView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        children: <Widget>[
-          const AddListingBasicInfoSection(),
-          SubCategorySelectableWidget(
-            listType: Provider.of<AddListingFormProvider>(context).listingType,
-            subCategory:
-                Provider.of<AddListingFormProvider>(context).selectedCategory,
-          ),
-          const AddListingPriceAndQuantityWidget(),
-          const AddListingConditionOfferSection(),
-          const AddListingDeliverySelectionWidget(),
-          const AddListingPostButtonWidget(),
-        ],
-      ),
-    );
+    return Consumer<AddListingFormProvider>(
+        builder: (BuildContext context, AddListingFormProvider formPro, _) {
+      return Form(
+        key: formPro.foodAndDrinkKey,
+        child: ListView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          children: <Widget>[
+            const AddListingBasicInfoSection(),
+            SubCategorySelectableWidget(
+              listType: formPro.listingType,
+              subCategory: formPro.selectedCategory,
+              onSelected: formPro.setSelectedCategory,
+            ),
+            const AddListingPriceAndQuantityWidget(),
+            const AddListingConditionOfferSection(),
+            const AddListingDeliverySelectionWidget(),
+            const AddListingPostButtonWidget(),
+          ],
+        ),
+      );
+    });
   }
 }

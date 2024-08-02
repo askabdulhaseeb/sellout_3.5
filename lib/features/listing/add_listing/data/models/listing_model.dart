@@ -15,7 +15,7 @@ class ListingModel extends ListingEntity {
       listId: json['list_id'],
       subCategory: subCategoryList,
       parent: json['parent'] ?? '',
-      address: json['adress'] ?? '',
+      address: json['address'] ?? '',
       isActive: json['is_active'] ?? false,
       cid: json['cid'],
       title: json['title'] ?? '',

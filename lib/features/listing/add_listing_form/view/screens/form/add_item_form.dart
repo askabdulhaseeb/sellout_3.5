@@ -25,6 +25,7 @@ class AddItemForm extends StatelessWidget {
               SubCategorySelectableWidget(
                 listType: formPro.listingType,
                 subCategory: formPro.selectedCategory,
+                onSelected: formPro.setSelectedCategory,
               ),
               const AddListingPriceAndQuantityWidget(),
               const AddListingConditionOfferSection(),

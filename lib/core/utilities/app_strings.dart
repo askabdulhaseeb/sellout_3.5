@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppStrings {
@@ -8,5 +9,6 @@ class AppStrings {
   static String get localReviewBox => 'local-review';
   static String get localListingBox => 'local-listing';
   // API
-  String get baseURL => dotenv.env['baseURL'] ?? '';
+  String get baseURL =>
+      kDebugMode ? 'http://192.168.0.181:3200' : dotenv.env['baseURL'] ?? '';
 }

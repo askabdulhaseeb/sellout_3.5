@@ -24,6 +24,7 @@ class AddVehicleForm extends StatelessWidget {
             SubCategorySelectableWidget(
               listType: formPro.listingType,
               subCategory: formPro.selectedCategory,
+              onSelected: formPro.setSelectedCategory,
             ),
             // TODO: Category selection widget
             const AddListingVehicleTernsmissionEngineMileageSection(),

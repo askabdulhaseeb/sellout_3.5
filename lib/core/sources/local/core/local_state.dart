@@ -12,5 +12,5 @@ class LocalState {
   static Future<void> saveCurrency(String currency) async =>
       await _preferences.setString(_key, currency);
 
-  static String getCurrency() => _preferences.getString(_key) ?? 'USD';
+  static String getCurrency() => _preferences.getString(_key) ?? 'usd';
 }

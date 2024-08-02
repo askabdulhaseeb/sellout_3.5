@@ -25,6 +25,7 @@ class AddClothsAndFootwearForm extends StatelessWidget {
               SubCategorySelectableWidget(
                 listType: formPro.listingType,
                 subCategory: formPro.selectedCategory,
+                onSelected: formPro.setSelectedCategory,
               ),
               // TODO: Size and Color selection widget
               const AddListingPriceAndQuantityWidget(readOnly: true),

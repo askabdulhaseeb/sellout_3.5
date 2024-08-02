@@ -14,7 +14,7 @@ class ListingAPI {
     final String url = '${AppStrings().baseURL}/category';
     try {
       ApiRequestEntity? request = await LocalRequestHistory()
-          .request(url, duration: const Duration(days: 1));
+          .request(url, duration: const Duration(seconds: 1));
       if (request != null) {
         final List<ListingEntity> local = LocalListing().listings;
         if (local.isNotEmpty) {
