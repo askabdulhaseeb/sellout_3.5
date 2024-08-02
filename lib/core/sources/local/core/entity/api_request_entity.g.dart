@@ -18,6 +18,7 @@ class ApiRequestEntityAdapter extends TypeAdapter<ApiRequestEntity> {
     };
     return ApiRequestEntity(
       url: fields[0] as String,
+      encodedData: fields[2] as String,
       lastRequest: fields[1] as DateTime?,
     );
   }
@@ -25,11 +26,13 @@ class ApiRequestEntityAdapter extends TypeAdapter<ApiRequestEntity> {
   @override
   void write(BinaryWriter writer, ApiRequestEntity obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.url)
       ..writeByte(1)
-      ..write(obj.lastRequest);
+      ..write(obj.lastRequest)
+      ..writeByte(2)
+      ..write(obj.encodedData);
   }
 
   @override

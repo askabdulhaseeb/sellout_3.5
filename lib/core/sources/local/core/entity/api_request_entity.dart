@@ -6,13 +6,18 @@ part 'api_request_entity.g.dart';
 
 @HiveType(typeId: 3)
 class ApiRequestEntity {
-  ApiRequestEntity({required this.url, DateTime? lastRequest})
-      : lastRequest = lastRequest ?? DateTime.now();
+  ApiRequestEntity({
+    required this.url,
+    required this.encodedData,
+    DateTime? lastRequest,
+  }) : lastRequest = lastRequest ?? DateTime.now();
 
   @HiveField(0)
   final String url;
   @HiveField(1)
   DateTime? lastRequest;
+  @HiveField(2)
+  String encodedData;
 
   bool timesAgo(Duration duration) {
     if (lastRequest == null) return true;

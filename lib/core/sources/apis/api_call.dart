@@ -1,4 +1,3 @@
-// ignore: depend_on_referenced_packages
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -59,7 +58,10 @@ class ApiCall<T> {
           log('❌ ERROR: ERROR: No Data Found - API: $url');
           return DataFailer<T>(CustomException('ERROR: No Data Found'));
         } else {
-          ApiRequestEntity apiRequestEntity = ApiRequestEntity(url: url);
+          ApiRequestEntity apiRequestEntity = ApiRequestEntity(
+            url: url,
+            encodedData: data,
+          );
           await LocalRequestHistory().save(apiRequestEntity);
           return DataSuccess<T>(data, null);
         }

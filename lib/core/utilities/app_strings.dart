@@ -6,6 +6,7 @@ class AppStrings {
   static String get localUsersBox => 'local-users';
   static String get localRequestHistory => 'request_history';
   static String get localReviewBox => 'local-review';
+  static String get localListingBox => 'local-listing';
   // API
   String get baseURL => dotenv.env['baseURL'] ?? '';
 }

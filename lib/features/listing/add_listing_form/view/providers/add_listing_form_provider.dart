@@ -7,13 +7,19 @@ import '../../../../../core/enums/listing/product_delivery_type.dart';
 import '../../../../../core/enums/listing/product_privacy_type.dart';
 import '../../../../../core/enums/listing/pet/product_time_type.dart';
 import '../../../../../core/enums/listing/vehicle/transmission_type.dart';
+import '../../../../../core/utilities/app_snakebar.dart';
 import '../../../../attachment_selection/selectable_attachment/domain/pickable_attachment_option.dart';
 import '../../../../attachment_selection/selectable_attachment/domain/picked_attachment.dart';
 import '../../../../attachment_selection/selectable_attachment/screens/pickable_attachment_screen.dart';
+import '../../../add_listing/domain/entities/sub_category_entity.dart';
 
 class AddListingFormProvider extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {
     if (_attachments.isEmpty) {
+      AppSnackBar.showSnackBar(
+        context,
+        'Please add at least one Photo or Video',
+      );
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Please add at least one Photo or Video'),
       ));
@@ -116,6 +122,11 @@ class AddListingFormProvider extends ChangeNotifier {
   /// Setter
   void setListingType(ListingType? value) {
     _listingType = value;
+    notifyListeners();
+  }
+
+  void setSelectedCategory(SubCategoryEntity? value) {
+    _selectedCategory = value;
     notifyListeners();
   }
 
@@ -247,6 +258,8 @@ class AddListingFormProvider extends ChangeNotifier {
   //
   /// Getter
   ListingType? get listingType => _listingType ?? ListingType.item;
+  SubCategoryEntity? get selectedCategory => _selectedCategory;
+  //
   List<PickedAttachment> get attachments => _attachments;
   ProductConditionType get condition => _condition;
   bool get acceptOffer => _acceptOffer;
@@ -286,6 +299,7 @@ class AddListingFormProvider extends ChangeNotifier {
   //
   /// Controller
   ListingType? _listingType;
+  SubCategoryEntity? _selectedCategory;
   // Selected Category
   // Size and Color
   ProductConditionType _condition = ProductConditionType.newC;

@@ -27,7 +27,7 @@ class UserModel extends UserEntity {
         timestamp: DateTime.tryParse(
                 json['timestamp']?.toString() ?? DateTime.now().toString()) ??
             DateTime.now(),
-        fullName: json['full_name'] ?? '',
+        fullName: json['display_name'] ?? '',
         email: json['email'] ?? '',
         uid: json['uid'] ?? '',
         interest: List<dynamic>.from(json['interest']),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../../core/enums/core/api_request_type.dart';
 import '../../../../core/sources/apis/api_call.dart';
@@ -14,8 +14,10 @@ class GetUserAPI {
         return DataFailer<UserEntity?>(CustomException('User ID is null'));
       }
       final String url = '${AppStrings().baseURL}/user/$uid';
-      ApiRequestEntity? request = await LocalRequestHistory()
-          .request(url, duration: const Duration(minutes: 30));
+      ApiRequestEntity? request = await LocalRequestHistory().request(url,
+          duration: kDebugMode
+              ? const Duration(seconds: 10)
+              : const Duration(minutes: 30));
       if (request != null) {
         final DataState<UserEntity?> local = LocalUser().userState(uid);
         if (local is DataSuccess<UserEntity?> && local.entity != null) {
