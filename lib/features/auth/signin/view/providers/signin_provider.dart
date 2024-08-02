@@ -23,18 +23,18 @@ class SigninProvider extends ChangeNotifier {
           '\n👉🏻 SigninProvider.signin: ${currentUser.email}'
           '\n👉🏻 SigninProvider.signin: ${currentUser.token}'
           '\n👉🏻 SigninProvider.signin: ${currentUser.userName}'
-          '\n👉🏻 SigninProvider.signin: ${currentUser.userId}'
-          '\n👉🏻 SigninProvider.signin: ${currentUser.fullName}',
+          '\n👉🏻 SigninProvider.signin: ${currentUser.userId}',
         );
         // Navigator
         // ignore: use_build_context_synchronously
         Navigator.of(context)
             .pushNamedAndRemoveUntil(DashboardScreen.routeName, (_) => false);
       } else if (result is DataFailer) {
-        debugPrint('❌ Error in SigninProvider.signin: $result');
+        debugPrint(
+            '❌ Error DataFailer in SigninProvider.signin: ${result.exception?.message}');
       }
     } catch (e) {
-      debugPrint('❌ Error in SigninProvider.signin: $e');
+      debugPrint('❌ Error catch in SigninProvider.signin: $e');
     }
     setLoading(false);
   }

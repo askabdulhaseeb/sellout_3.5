@@ -13,7 +13,7 @@ class HomePromoListSection extends StatefulWidget {
 
 class _HomePromoListSectionState extends State<HomePromoListSection> {
   Future<int> _fetchPromos() async {
-    await Future<int>.delayed(const Duration(seconds: 2));
+    await Future<int>.delayed(const Duration(seconds: 2), () => 1);
     return 5;
   }
 

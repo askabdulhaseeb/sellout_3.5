@@ -1,4 +1,6 @@
 import 'package:hive/hive.dart';
+
+import '../../data/models/address_model.dart';
 part 'current_user_entity.g.dart';
 
 @HiveType(typeId: 0)
@@ -9,7 +11,8 @@ class CurrentUserEntity {
     required this.token,
     required this.userName,
     required this.userId,
-    required this.fullName,
+    required this.chatIDs,
+    required this.address,
   });
 
   @HiveField(0)
@@ -23,5 +26,7 @@ class CurrentUserEntity {
   @HiveField(4)
   final String userId;
   @HiveField(5)
-  final String fullName;
+  final List<String> chatIDs;
+  @HiveField(6)
+  final List<AddressEntity> address;
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -34,9 +33,13 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
           useMaterial3: true,
         ),
-        home: kDebugMode
-            ? const DashboardScreen()
-            : LocalAuth.currentUser == null
+        home:
+            //
+            // kDebugMode
+            //     ? const DashboardScreen()
+            //     :
+            //
+            LocalAuth.currentUser == null
                 ? const WelcomeScreen()
                 : const DashboardScreen(),
         routes: routes,

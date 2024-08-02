@@ -22,14 +22,15 @@ class CurrentUserEntityAdapter extends TypeAdapter<CurrentUserEntity> {
       token: fields[2] as String,
       userName: fields[3] as String,
       userId: fields[4] as String,
-      fullName: fields[5] as String,
+      chatIDs: (fields[5] as List).cast<String>(),
+      address: (fields[6] as List).cast<AddressEntity>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, CurrentUserEntity obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.message)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class CurrentUserEntityAdapter extends TypeAdapter<CurrentUserEntity> {
       ..writeByte(4)
       ..write(obj.userId)
       ..writeByte(5)
-      ..write(obj.fullName);
+      ..write(obj.chatIDs)
+      ..writeByte(6)
+      ..write(obj.address);
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../../../core/sources/apis/data_state.dart';
@@ -28,6 +30,7 @@ class ProfileScreen extends StatelessWidget {
             return const Loader();
           }
           if (snapshot.data is DataFailer<UserEntity?>) {
+            log('❌ Prfile Screen: Error: ${snapshot.data?.exception?.message}');
             return const Center(child: Text('Error loading user data'));
           }
           if (user == null) {

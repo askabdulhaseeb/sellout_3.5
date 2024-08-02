@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../features/auth/signin/domain/entities/address_entity.dart';
 import '../../../../features/review/domain/entities/review_entity.dart';
 import '../auth/local_auth.dart';
 import '../local_review.dart';
@@ -25,6 +26,7 @@ class HiveDB {
     Hive.registerAdapter(ApiRequestEntityAdapter()); // 3
     Hive.registerAdapter(AttachmentEntityAdapter()); // 4
     Hive.registerAdapter(AttachmentTypeAdapter()); // 5
+    Hive.registerAdapter(AddressEntityAdapter()); // 6
     // Hive box Open
     await refresh();
   }

@@ -17,15 +17,6 @@ class AddListingVehicleTernsmissionEngineMileageSection
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            CustomToggleSwitch<TransmissionType>(
-              labels: TransmissionType.list,
-              labelStrs: TransmissionType.list
-                  .map((TransmissionType e) => e.title)
-                  .toList(),
-              labelText: 'Transmission',
-              onToggle: formPro.setTransmissionType,
-              initialValue: formPro.transmissionType,
-            ),
             Row(
               children: <Widget>[
                 Expanded(
@@ -46,7 +37,16 @@ class AddListingVehicleTernsmissionEngineMileageSection
                   ),
                 ),
               ],
-            )
+            ),
+            CustomToggleSwitch<TransmissionType>(
+              labels: TransmissionType.list,
+              labelStrs: TransmissionType.list
+                  .map((TransmissionType e) => e.title)
+                  .toList(),
+              labelText: 'Transmission',
+              onToggle: formPro.setTransmissionType,
+              initialValue: formPro.transmissionType,
+            ),
           ],
         );
       },
